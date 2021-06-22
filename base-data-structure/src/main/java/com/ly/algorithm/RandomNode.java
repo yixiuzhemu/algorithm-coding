@@ -33,5 +33,4 @@ public class RandomNode {
     public RandomNode copyNode(){
         return new RandomNode(this.value);
     }
-
 }
