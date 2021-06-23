@@ -365,4 +365,36 @@ public class TreeCoding {
             return tree.getParent();
         }
     }
+
+    /**
+     * 请把一段纸条竖着放在桌子上，然后从纸条的下边向上方对折1次，压出折痕
+     * 后展开。此时折痕是凹下去的，即折痕突起的方向指向纸条的背面。如果从
+     * 纸条的下边向上方连续对折两次，压出折痕后展开，此时有三条折痕，从上到
+     * 下依次是下折痕，下折痕和上折痕。
+     * 给定一个输入参数N，代表纸条都从下边向上方连续对折N次，请从上到下打
+     * 印所有折痕的方向
+     * 例如 N = 1时，打印 down  N = 2时，打印Ldown down up
+     */
+
+    public static void printAllCrease(int N){
+        printProcess(1,N,true);
+    }
+
+    /**
+     * 纸张对折实际上 就是在当前这次折痕的上方全是凹折痕，下方全是凸折痕
+     * 并且每次增加的折痕数是2的N次方，实际上可以组成一颗满二叉树
+     * 而从上到下打印所有的折痕，（上，当前折痕，下）实际上是对二叉树进行中序遍历
+     * @param i
+     * @param N
+     * @param down
+     */
+    private static void printProcess(int i,int N,Boolean down){
+        if(i > N){
+            return;
+        }
+        printProcess(i+1,N,true);
+        System.out.print(" "+(down?"凹":"凸")+" ");
+        printProcess(i+1,N,false);
+    }
+
 }

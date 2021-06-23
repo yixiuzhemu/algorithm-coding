@@ -87,4 +87,9 @@ public class TreeCodingTest {
         System.out.println("当前节点的后继节点为："+(successdingTree == null ? null:successdingTree.getValue()));
         System.out.println("当前节点的前驱节点为："+(precursorNode == null ? null:precursorNode.getValue()));
     }
+
+    @Test
+    public void testPrint(){
+        TreeCoding.printAllCrease(5);
+    }
 }
