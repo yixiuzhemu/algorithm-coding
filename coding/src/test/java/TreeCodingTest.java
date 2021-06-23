@@ -1,4 +1,5 @@
 import com.google.common.collect.Lists;
+import com.ly.algorithm.ParentTree;
 import com.ly.algorithm.Tree;
 import com.ly.algorithm.coding.TreeCoding;
 import org.junit.Before;
@@ -71,5 +72,19 @@ public class TreeCodingTest {
         TreeCoding.levelSerial(tree,result);
         Tree tree = TreeCoding.buildLevelTree(result);
         TreeCoding.width(tree);
+    }
+
+
+    @Test
+    public void testParentNode(){
+        ParentTree[] trees = TestData.getParentTree();
+        System.out.println("中序遍历结果：");
+        TreeCoding.mid(trees[0]);
+        ParentTree successdingTree = TreeCoding.getSuccessdingTree(trees[1]);
+        ParentTree precursorNode = TreeCoding.getPrecursorNode(trees[1]);
+        System.out.println("--------------------------------------------------------");
+        System.out.println("当前节点为："+trees[1].getValue());
+        System.out.println("当前节点的后继节点为："+(successdingTree == null ? null:successdingTree.getValue()));
+        System.out.println("当前节点的前驱节点为："+(precursorNode == null ? null:precursorNode.getValue()));
     }
 }

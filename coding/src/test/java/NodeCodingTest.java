@@ -34,4 +34,5 @@ public class NodeCodingTest {
         node2.setNext(node4);
         NodeCoding.haveLoop(head,head2);
     }
+
 }

@@ -12,16 +12,17 @@ import lombok.Data;
 public class Tree {
 
 
-    private Integer value;
+    protected Integer value;
 
     /**
      * left tree
      */
-    private Tree left;
+    protected Tree left;
 
     /**
      * right tree
      */
-    private Tree right;
+    protected Tree right;
+
 
 }

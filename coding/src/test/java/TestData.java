@@ -1,6 +1,11 @@
+import com.google.common.collect.Lists;
 import com.ly.algorithm.Node;
+import com.ly.algorithm.ParentTree;
 import com.ly.algorithm.RandomNode;
 import com.ly.algorithm.Tree;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author Ly
@@ -28,6 +33,41 @@ public class TestData {
         node =  node.addNode(new Node(7));
         node =  node.addNode(new Node(8));
         return head;
+    }
+
+    public static ParentTree[] getParentTree(){
+        List<ParentTree> treeLists = Lists.newArrayList();
+        ParentTree tree = new ParentTree(1);
+        treeLists.add(tree);
+        ParentTree tree2 = new ParentTree(2);
+        treeLists.add(tree2);
+        ParentTree tree3 = new ParentTree(3);
+        treeLists.add(tree3);
+        ParentTree tree4 = new ParentTree(4);
+        treeLists.add(tree4);
+        ParentTree tree5 = new ParentTree(5);
+        treeLists.add(tree5);
+        ParentTree tree6 = new ParentTree(6);
+        treeLists.add(tree6);
+        ParentTree tree7 = new ParentTree(7);
+        treeLists.add(tree7);
+        ParentTree tree8 = new ParentTree(8);
+        treeLists.add(tree8);
+        ParentTree tree9 = new ParentTree(9);
+        treeLists.add(tree9);
+        ParentTree tree10 = new ParentTree(10);
+        treeLists.add(tree10);
+        tree.setLeft(tree2);
+        tree.setRight(tree3);
+        tree2.setLeft(tree4);
+        tree2.setRight(tree5);
+        tree3.setLeft(tree6);
+        tree3.setRight(tree7);
+        tree4.setRight(tree8);
+        tree6.setLeft(tree9);
+        tree7.setRight(tree10);
+        Random random = new Random();
+        return new ParentTree[]{tree, treeLists.get(random.nextInt(treeLists.size()))};
     }
 
     public static Node getLoopNode(){

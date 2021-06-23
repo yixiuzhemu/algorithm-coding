@@ -1,5 +1,6 @@
 import com.alibaba.fastjson.JSON;
 import com.ly.algorithm.Node;
+import com.ly.algorithm.ParentTree;
 import com.ly.algorithm.RandomNode;
 import com.ly.algorithm.Tree;
 import jdk.nashorn.internal.ir.LoopNode;
@@ -25,6 +26,10 @@ public class TodayTest {
 
     private RandomNode randomNode = null;
 
+    private ParentTree headTree = null;
+
+    private ParentTree currentTree = null;
+
     @Before
     public void init(){
         arr = TestData.getArr();
@@ -32,6 +37,10 @@ public class TodayTest {
         head = TestData.getNode();
         loopNode = TestData.getLoopNode();
         randomNode = TestData.getRandomNode();
+        //获取头节点 和一个随机节点
+        ParentTree[] parentTree = TestData.getParentTree();
+        headTree = parentTree[0];
+        currentTree = parentTree[1];
     }
 
     @Test

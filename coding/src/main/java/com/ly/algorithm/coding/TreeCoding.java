@@ -1,6 +1,7 @@
 package com.ly.algorithm.coding;
 
 import com.google.common.collect.Lists;
+import com.ly.algorithm.ParentTree;
 import com.ly.algorithm.Tree;
 
 import java.util.LinkedList;
@@ -297,5 +298,71 @@ public class TreeCoding {
             }
         }
         return tree;
+    }
+
+    /**
+     * 从拥有父节点的树中找到某一个节点的后继节点
+     * （后继节点：中序遍历中的下一个节点）
+     * @param tree
+     * @return
+     */
+    public static ParentTree getSuccessdingTree(ParentTree tree){
+        if(tree == null){
+            return null;
+        }
+        ParentTree right = tree.getRight();
+        //当存在右子树时，右子树的最左节点就是当前节点的后继节点
+        if(right != null){
+            ParentTree left = right.getLeft();
+            if(left == null){
+                return right;
+            }
+            while(left.getLeft() != null){
+                left = left.getLeft();
+            }
+            return left;
+        }else{
+            //当不存在右子树时，当前节点的某个父节点是其父节点的左子树时，这个父节点就为当前节点的后继节点
+            ParentTree node = tree.getParent();
+            if(node == null){
+                return null;
+            }
+            ParentTree parent = node.getParent();
+            while(parent != null && parent.getLeft() != node){
+                node = parent;
+                parent = node.getParent();
+            }
+            if(parent == null){
+                return null;
+            }
+            return parent;
+        }
+    }
+
+    /**
+     * 从拥有父节点的树中找到某一个节点的前驱节点
+     * （前驱节点：中序遍历中的上一个节点）
+     * @param tree
+     * @return
+     */
+    public static ParentTree getPrecursorNode(ParentTree tree){
+        if(tree == null){
+            return null;
+        }
+        ParentTree left = tree.getLeft();
+        if(left != null){
+            //如果存在左子树，那么左子树最右的节点就是当前节点的前驱节点
+            ParentTree right = left.getRight();
+            if(right == null){
+                return left;
+            }
+            while(right.getRight() != null){
+                right = right.getRight();
+            }
+            return right;
+        }else{
+            //当不存在左子树时，当前节点的父节点就是当前节点的前驱节点
+            return tree.getParent();
+        }
     }
 }
