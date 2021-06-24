@@ -90,6 +90,22 @@ public class TreeCodingTest {
 
     @Test
     public void testPrint(){
-        TreeCoding.printAllCrease(5);
+        TreeCoding.printAllCrease(6);
+    }
+
+    @Test
+    public void testMaxDistance(){
+        Tree tree = TestData.getTree();
+        Integer distance = TreeCoding.getMaxDistance(tree);
+        System.out.println("最大距离为："+distance);
+
+    }
+
+    @Test
+    public void testMaxSearchTree(){
+        Tree tree = TestData.getTree();
+        Integer maxSearchTree = TreeCoding.getMaxSearchTree(tree);
+        System.out.println("最大搜索子树节点数为："+maxSearchTree);
+
     }
 }

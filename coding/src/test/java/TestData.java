@@ -1,11 +1,10 @@
 import com.google.common.collect.Lists;
-import com.ly.algorithm.Node;
-import com.ly.algorithm.ParentTree;
-import com.ly.algorithm.RandomNode;
-import com.ly.algorithm.Tree;
+import com.google.common.collect.Sets;
+import com.ly.algorithm.*;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * @author Ly
@@ -110,7 +109,7 @@ public class TestData {
         Tree tree3 = new Tree();
         tree1.setLeft(tree2);
         tree1.setRight(tree3);
-        tree3.setValue(3);
+        tree3.setValue(7);
         Tree tree4 = new Tree();
         tree4.setValue(4);
         Tree tree5 = new Tree();
@@ -120,7 +119,7 @@ public class TestData {
         Tree tree6 = new Tree();
         tree6.setValue(6);
         Tree tree7 = new Tree();
-        tree7.setValue(7);
+        tree7.setValue(8);
         tree3.setLeft(tree6);
         tree3.setRight(tree7);
         return tree1;
@@ -133,6 +132,53 @@ public class TestData {
         arr[i] = arr[i] ^ arr[j];
         arr[j] = arr[i] ^ arr[j];
         arr[i] = arr[i] ^ arr[j];
+    }
+
+    public static EmployeeInfo getEmployeeInfo(){
+        Random random = new Random();
+        Integer baseHappy = 100;
+        EmployeeInfo boss = new EmployeeInfo(10);
+        List<EmployeeInfo> e1 = Lists.newArrayList();
+        boss.subordinates = e1;
+        List<EmployeeInfo> e2 = Lists.newArrayList();
+        List<EmployeeInfo> e3 = Lists.newArrayList();
+        List<EmployeeInfo> e4 = Lists.newArrayList();
+        List<EmployeeInfo> e5 = Lists.newArrayList();
+        List<EmployeeInfo> e6 = Lists.newArrayList();
+        List<EmployeeInfo> e7 = Lists.newArrayList();
+        EmployeeInfo employeeInfo1 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        EmployeeInfo employeeInfo2 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        EmployeeInfo employeeInfo3 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e1.add(employeeInfo1);
+        e1.add(employeeInfo2);
+        e1.add(employeeInfo3);
+        employeeInfo1.subordinates = e2;
+        employeeInfo2.subordinates = e3;
+        employeeInfo3.subordinates = e4;
+        EmployeeInfo employeeInfo4 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        EmployeeInfo employeeInfo5 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e2.add(employeeInfo4);
+        e2.add(employeeInfo5);
+        EmployeeInfo employeeInfo6 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e3.add(employeeInfo6);
+        EmployeeInfo employeeInfo7 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        EmployeeInfo employeeInfo8 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        EmployeeInfo employeeInfo9 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e4.add(employeeInfo7);
+        e4.add(employeeInfo8);
+        e4.add(employeeInfo9);
+        employeeInfo7.subordinates = e5;
+        employeeInfo8.subordinates = e6;
+        employeeInfo9.subordinates = e7;
+        EmployeeInfo employeeInfo10 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e5.add(employeeInfo10);
+        EmployeeInfo employeeInfo11 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        EmployeeInfo employeeInfo12 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e6.add(employeeInfo11);
+        e6.add(employeeInfo12);
+        EmployeeInfo employeeInfo13 = new EmployeeInfo(random.nextInt(baseHappy) + 1);
+        e7.add(employeeInfo13);
+        return boss;
     }
 
 }

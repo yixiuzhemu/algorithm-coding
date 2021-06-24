@@ -38,6 +38,9 @@ public class CodingTest {
         maps.put(++count,"二叉树宽度、层级遍历");
         maps.put(++count,"二叉树序列化、反序列化");
         maps.put(++count,"ParentTree树结构获取前驱、后继节点");
+        maps.put(++count,"二叉树最大距离");
+        maps.put(++count,"搜索二叉树的头节点");
+        maps.put(++count,"派对最大快乐值");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;
