@@ -1,10 +1,13 @@
 package com.ly.algorithm.coding;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.ly.algorithm.ParentTree;
 import com.ly.algorithm.Tree;
 
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author Ly
@@ -395,143 +398,4 @@ public class TreeCoding {
         printProcess(i+1,N,false);
     }
 
-
-    /**
-     * 给定一棵二叉树的头节点head，任何两个节点之间都存在距离，返回整棵二叉树的最大距离
-     * 1.最大距离和X无关： 最大距离在左子树  或 最大距离在右子树
-     * 2.最大距离和X有关： 距离X最远的左子树上的节点 到 距离X最远的右子树上的点（左树的高度+1+右树的高度）
-     *
-     * 需要返回左子树的最大距离 以及右子树的最大距离
-     *
-     */
-
-    static class Info{
-        /**
-         * 整棵树的最大距离
-         */
-        public int maxDistance;
-
-        /**
-         * 整棵树的最大高度
-         */
-        public int height;
-
-        public Info(int maxDistance, int height) {
-            this.maxDistance = maxDistance;
-            this.height = height;
-        }
-    }
-
-    private static Info getDistance(Tree tree){
-        if(tree == null){
-            return new Info(0,0);
-        }
-        Info leftInfo = getDistance(tree.getLeft());
-        Info rightInfo = getDistance(tree.getRight());
-        //最大高度，就是左子树高度和右子树高度其中的最大值
-        int height = Math.max(leftInfo.height,rightInfo.height)+1;
-        //最大距离，判断最大距离是否和X有关，如果左子树最大高度加上右子树最大高度加上1大于左右子树最大距离，那么最大距离和X有关
-        int maxDistance = Math.max(Math.max(leftInfo.maxDistance,rightInfo.maxDistance),leftInfo.height+1+rightInfo.height);
-        return new Info(maxDistance,height);
-    }
-
-    public static Integer getMaxDistance(Tree tree){
-        return getDistance(tree).maxDistance;
-    }
-
-
-    /**
-     * 给定一棵二叉树的头节点head，返回这棵二叉树中最大的二叉搜索子树的头节点
-     * 搜索二叉树：整个树上没有重复值，左树的值都比头节点小，右树的值都比头节点大
-     * 1.与X无关：不以x为头节点，
-     * 2.与X有关：左树整体为搜索二叉树，右树整体为搜索二叉树，且左树的搜索二叉树头节点要小于右树的搜索二叉树头节点
-     *
-     * 需要的信息
-     * 左树
-     * 1.最大左子树搜索二叉树头节点
-     * 2.左子树整体是否是搜索二叉树
-     * 3.左树上的最大值
-     * 4.搜索二叉树的节点数
-     *
-     * 右树
-     * 1.最大右子树搜索二叉树头节点
-     * 2.右子树整体是否是搜索二叉树
-     * 3.右子树的最大值，右子树的最小值
-     * 4.搜索二叉树的节点数
-     *
-     * 取并集
-     */
-
-    static class SearchInfo{
-        //整棵树是否是搜索二叉树
-        public boolean isAllBST;
-        //搜索二叉树的节点数
-        public int maxSubBSTSize;
-        //最小值
-        public int min;
-        //最大值
-        public int max;
-
-        //搜索二叉树的头节点
-        public Tree maxSSearchHeadTree;
-
-        public SearchInfo(boolean isAllBST, int maxSubBSTSize, int min, int max,Tree maxSSearchHeadTree) {
-            this.isAllBST = isAllBST;
-            this.maxSubBSTSize = maxSubBSTSize;
-            this.min = min;
-            this.max = max;
-            this.maxSSearchHeadTree = maxSSearchHeadTree;
-        }
-    }
-
-    private static SearchInfo getSearchTree(Tree tree){
-        if(tree == null){
-            return  null;
-        }
-        SearchInfo leftSearchTree = getSearchTree(tree.getLeft());
-        SearchInfo rightSearchTree = getSearchTree(tree.getRight());
-        boolean isAllBST = false;
-        int maxSubBSTSize = 0;
-        int min = tree.getValue();
-        int max = tree.getValue();
-        Tree maxSSearchHeadTree = null;
-        if(leftSearchTree != null){
-            min = Math.min(min,leftSearchTree.min);
-            max = Math.max(max,leftSearchTree.max);
-            if (maxSubBSTSize < leftSearchTree.maxSubBSTSize){
-                maxSubBSTSize = leftSearchTree.maxSubBSTSize;
-                if(leftSearchTree.isAllBST){
-                    maxSSearchHeadTree = leftSearchTree.maxSSearchHeadTree;
-                }
-
-            }
-        }
-        if(rightSearchTree != null){
-            min = Math.min(min,rightSearchTree.min);
-            max = Math.max(max,rightSearchTree.max);
-            if (maxSubBSTSize < rightSearchTree.maxSubBSTSize){
-                maxSubBSTSize = rightSearchTree.maxSubBSTSize;
-                if(rightSearchTree.isAllBST){
-                    maxSSearchHeadTree = rightSearchTree.maxSSearchHeadTree;
-                }
-            }
-        }
-        if((leftSearchTree == null ? true : leftSearchTree.isAllBST)
-                &&(rightSearchTree == null ? true:rightSearchTree.isAllBST)
-        && (leftSearchTree == null ? true : leftSearchTree.max < tree.getValue())
-        && (rightSearchTree == null ? true : rightSearchTree.min > tree.getValue())){
-            isAllBST = true;
-            maxSubBSTSize = (leftSearchTree == null ? 0 : leftSearchTree.maxSubBSTSize) + (rightSearchTree == null ? 0 :rightSearchTree.maxSubBSTSize)+1;
-            maxSSearchHeadTree = tree;
-        }
-        return new SearchInfo(isAllBST,maxSubBSTSize,min,max,maxSSearchHeadTree);
-    }
-
-    public static Integer getMaxSearchTree(Tree tree){
-        SearchInfo searchTree = getSearchTree(tree);
-        if(searchTree == null){
-            return null;
-        }
-        return searchTree.maxSubBSTSize;
-    }
 }

@@ -41,6 +41,10 @@ public class CodingTest {
         maps.put(++count,"二叉树最大距离");
         maps.put(++count,"搜索二叉树的头节点");
         maps.put(++count,"派对最大快乐值");
+        maps.put(++count,"判断是否是满二叉树");
+        maps.put(++count,"判断是否是完全二叉树");
+        maps.put(++count,"两个节点最低公共祖先");
+        maps.put(++count,"返回字符串拼接字典序最小的结果");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;

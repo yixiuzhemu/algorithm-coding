@@ -1,6 +1,8 @@
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.ly.algorithm.ParentTree;
 import com.ly.algorithm.Tree;
+import com.ly.algorithm.coding.RecursiveRoutineCoding;
 import com.ly.algorithm.coding.TreeCoding;
 import org.junit.Before;
 import org.junit.Test;
@@ -96,7 +98,7 @@ public class TreeCodingTest {
     @Test
     public void testMaxDistance(){
         Tree tree = TestData.getTree();
-        Integer distance = TreeCoding.getMaxDistance(tree);
+        Integer distance = RecursiveRoutineCoding.getMaxDistance(tree);
         System.out.println("最大距离为："+distance);
 
     }
@@ -104,8 +106,44 @@ public class TreeCodingTest {
     @Test
     public void testMaxSearchTree(){
         Tree tree = TestData.getTree();
-        Integer maxSearchTree = TreeCoding.getMaxSearchTree(tree);
+        Integer maxSearchTree = RecursiveRoutineCoding.getMaxSearchTree(tree);
         System.out.println("最大搜索子树节点数为："+maxSearchTree);
+
+    }
+
+    @Test
+    public void testFullTree(){
+        Tree tree = new Tree(13);
+        tree.setLeft(new Tree(76));
+        Tree tree1 = new Tree(87);
+        tree1.setLeft(new Tree(17));
+        tree.setRight(tree1);
+        System.out.println(JSON.toJSONString(tree));
+        System.out.println("是否是满二叉树："+ RecursiveRoutineCoding.isFullTree(tree));
+    }
+
+    @Test
+    public void testCompletelyTree(){
+        for(int i = 0 ;i<100000;i++){
+            Tree tree = TestData.getRandomTree();
+            if(RecursiveRoutineCoding.isCompletelyTree2(tree) != RecursiveRoutineCoding.isCompletelyTree(tree)){
+                System.out.println("1："+ RecursiveRoutineCoding.isCompletelyTree2(tree) +" 2:"+RecursiveRoutineCoding.isCompletelyTree(tree));
+                System.out.println("校验失败："+ JSON.toJSONString(tree));
+                RecursiveRoutineCoding.isCompletelyTree(tree);
+                TreeCoding.width(tree);
+                TreeCoding.pre(tree);
+                TreeCoding.mid(tree);
+            }
+
+        }
+        System.out.println("校验通过！");
+    }
+
+
+    @Test
+    public void testAncestorTree(){
+            Tree tree =  TestData.getRandomTree();
+            RecursiveRoutineCoding.getAncestor(tree);
 
     }
 }

@@ -111,7 +111,7 @@ public class TestData {
         tree1.setRight(tree3);
         tree3.setValue(7);
         Tree tree4 = new Tree();
-        tree4.setValue(4);
+        tree4.setValue(8);
         Tree tree5 = new Tree();
         tree5.setValue(5);
         tree2.setLeft(tree4);
@@ -124,6 +124,23 @@ public class TestData {
         tree3.setRight(tree7);
         return tree1;
     }
+
+    public static Tree getRandomTree(){
+        int maxLevel = 2;
+        int maxValue = 100;
+        return  generate(0,maxLevel,maxValue);
+    }
+
+    private static Tree generate(int level,int maxLevel,int maxValue){
+        if(level > maxLevel || Math.random() < 0.5){
+            return null;
+        }
+        Tree head = new Tree((int) (Math.random() * maxValue));
+        head.setLeft(generate(level+1,maxLevel,maxValue));
+        head.setRight(generate(level+1,maxLevel,maxValue));
+        return head;
+    }
+
 
     public static void swap(int[] arr,int i,int j){
         if(i == j){
@@ -181,4 +198,44 @@ public class TestData {
         return boss;
     }
 
+    /**
+     * 生成一组随机字符串
+     * @param arrLen
+     * @param strLen
+     * @return
+     */
+    public static String[] generateRandomStringArray(int arrLen,int strLen){
+        String[] ans = new String[(int)(Math.random() * arrLen) + 1];
+        for(int i =0;i<ans.length;i++){
+            ans[i] = generateRandomString(strLen);
+        }
+        return ans;
+    }
+
+    /**
+     * 复制一组随机字符串
+     * @param arr
+     * @return
+     */
+    public static String[] copyStringArray(String[] arr){
+        String[] ans = new String[arr.length];
+        for(int i = 0;i<ans.length;i++){
+            ans[i] = String.valueOf(arr[i]);
+        }
+        return ans;
+    }
+
+    /**
+     * 生成一个随机字符串
+     * @param strLen
+     * @return
+     */
+    private static String generateRandomString(int strLen){
+        char[] ans = new char[(int)(Math.random() * strLen) + 1];
+        for(int i = 0;i<ans.length;i++){
+            int value = (int)(Math.random() * 5);
+            ans[i] = (char)(97+value);
+        }
+        return String.valueOf(ans);
+    }
 }
