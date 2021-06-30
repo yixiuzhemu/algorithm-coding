@@ -1,12 +1,11 @@
 package com.ly.algorithm.coding;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.apache.commons.collections.CollectionUtils;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 贪心算法
@@ -14,6 +13,18 @@ import java.util.Set;
  * 2.用一种局部最功利的标准，总是做出在当前看来是最好的选择
  * 3.难点在于证明局部最功利的标准可以得到全局最优解
  * 4.对于贪心算法的学习主要以增加阅历和经验为主
+ *
+ * 贪心算法的求解的标准流程
+ * 1.分析业务
+ * 2.根据业务逻辑找到不同的贪心策略
+ * 3.对于能举出反例的策略直接跳过，不能举出反例的策略要证明有效性，这往往是特别困难的，要求数学能力很高且不具有统一的技巧性
+ *
+ *
+ * 贪心算法的解题套路
+ * 1.实现一个不依靠贪心策略的解法X，可以用最暴力的尝试
+ * 2.脑补出贪心策略A、贪心策略B、贪心策略C。。。
+ * 3.用解法X和对数器，用实验的方式得知哪个贪心策略最正确
+ * 4.不要去纠结贪心策略的证明
  *
  * @author Ly
  * @create 2021/6/25 16:39
@@ -97,4 +108,127 @@ public class GreedyAlgorithmCoding {
             }
         }
     }
+
+
+    /**
+     * 一些项目要占用一个会议室宣讲，会议室不能同时容纳两个项目的宣讲。
+     * 给你每一个项目的开始时间和结束时间，
+     * 你来安排宣讲得到日程，要求会议室进行的宣讲的场次最多
+     * 返回最多的宣讲场次
+     * 贪心策略：按照结束时间早进行安排（谁的结束时间早先安排谁）
+     */
+
+    public static class Program {
+        /**
+         * 会议开始时间
+         */
+        public int start;
+
+        /**
+         * 会议结束时间
+         */
+        public int end;
+
+        public Program(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        public String toString() {
+            return "Program{" +
+                    "start=" + start +
+                    ", end=" + end +
+                    '}';
+        }
+    }
+
+    public static class MyProgramComparator implements Comparator<Program>{
+        @Override
+        public int compare(Program o1, Program o2) {
+            return o1.end - o2.end;
+        }
+    }
+
+    /**
+     * 获取会议
+     * @return
+     */
+    public static List<Program> getRandomPrograms(){
+        List<Program> programs  = Lists.newArrayList();
+        Random random = new Random();
+        for(int i = 0;i<15;i++){
+            int start = random.nextInt(17)+6;
+            int m = 0;
+            while(( m = random.nextInt(24-start)) == 0){}
+            int end = start + m;
+            programs.add(new Program(start,end));
+        }
+        return programs;
+    }
+
+    /**
+     * 还剩什么会议都放在program中
+     * done之前已经安排了多少会议
+     * timeLine 目前来到的时间点是什么
+     * 目前来到timeLine的时间点，已经安排了done的会议，剩下的可安排会议
+     *
+     * 每次循环找到 以当前会议为开始的所有可能的组合
+     */
+    public static int process(Program[] programs,int done,int timeLine){
+        if(programs.length == 0){
+            return done;
+        }
+        int max = done;
+        //每次都从全部会议中获取
+        for(int i = 0;i<programs.length;i++){
+            if(programs[i].start >= timeLine){
+                //将当前会议从数组中移除
+                //每次都复制一个新数组，不用恢复现场
+                Program[] next = copyButExcept(programs,i);
+                max = Math.max(max,process(next,done+1,programs[i].end));
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 贪心策略，按照结束时间晚进行排序
+     * 然后遍历得到最多的安排
+     * @param programs
+     * @return
+     */
+    public static int process2(Program[] programs){
+        Arrays.sort(programs,new MyProgramComparator());
+        int timeLine = 0;
+        int result = 0;
+        for(int i = 0;i<programs.length;i++){
+            if(timeLine <= programs[i].start){
+                result++;
+                timeLine = programs[i].end;
+            }
+        }
+        return result;
+    }
+
+
+    public static Program[] copyButExcept(Program[] programs,int i ){
+        Program[] ans = new Program[programs.length - 1];
+        int index = 0;
+        for(int k = 0;k<programs.length;k++){
+            if( k != i){
+                ans[index++] = programs[k];
+            }
+        }
+        return  ans;
+    }
+
+    /**
+     * 给定一个字符串str，只由‘X’和‘。’两种字符构成
+     * ‘X’表示墙，不能放灯，也不需要点亮
+     * ‘。’表示居民点，可以放灯，需要点亮
+     * 如果灯放在i位置，可以让i-1，i和i+1三个位置点亮
+     * 返回如果点亮str中所有需要点亮的位置，至少需要几盏灯
+     */
+
 }
