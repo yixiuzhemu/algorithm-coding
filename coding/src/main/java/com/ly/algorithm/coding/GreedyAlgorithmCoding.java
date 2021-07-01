@@ -230,5 +230,214 @@ public class GreedyAlgorithmCoding {
      * 如果灯放在i位置，可以让i-1，i和i+1三个位置点亮
      * 返回如果点亮str中所有需要点亮的位置，至少需要几盏灯
      */
+    public static int getLightUpResult(String str){
+        if(str == null || "".equals(str)){
+            return -1;
+        }
+        return lightUp(str.toCharArray(),0,Sets.<Integer>newHashSet());
+    }
+
+    /**
+     * str[index...]位置，自由选择放灯还是不放灯
+     * @param chars
+     * @param index index之前的位置已经选择了放灯或者不放灯
+     * @param lights 放了灯的位置，存在lights
+     * @return 要求选出能照亮所有.的方案，并且在这些有效方案中，返回最少需要几盏灯
+     */
+    public static int lightUp(char[] chars,int index,Set<Integer> lights){
+        if(index == chars.length){
+            for(int i = 0;i<chars.length;i++){
+                if(chars[i] != 'X'){
+                    if(!lights.contains(i-1) && !lights.contains(i) && !lights.contains(i+1)){
+                        return Integer.MAX_VALUE;
+                    }
+                }
+            }
+            return lights.size();
+        }else{
+            //分为两种情况，当前位置放灯，当前不放灯
+            int no = lightUp(chars,index+1,lights);
+            int yes = Integer.MAX_VALUE;
+            if(chars[index] == '.'){
+                lights.add(index);
+                //返回的是之后的 放不放灯场景的最优解
+                yes = lightUp(chars,index+1,lights);
+                lights.remove(index);
+            }
+            return Math.min(yes,no);
+        }
+    }
+
+    /**
+     * 贪心算法
+     * i位置为X：不处理
+     * i位置为.：判断i+1位置是否为X，如果为X 则i位置放灯
+     * 如果i+1位置为.，那么直接点亮i+1位置，并且索引跳到i+3位置
+     */
+    public static int lightUp2(String str){
+        char[] chars = str.toCharArray();
+        int index = 0;
+        int light = 0;
+        while(index < chars.length){
+            if(chars[index] == 'X'){
+                index++;
+            }else{
+                light++;
+                if(index + 1 == chars.length) {
+                    break;
+                }else{
+                    if(chars[index+1] == 'X'){
+                        index = index+2;
+                    }else{
+                        index = index+3;
+                    }
+                }
+            }
+        }
+        return light;
+    }
+
+
+    /**
+     * 一块金条切成两半，是需要花费和长度数值一样的铜板的
+     * 比如长度为20的金条，不管怎么切，都需要花费20个铜板，一群人想分整块金条，怎么分最省铜板
+     * 例如给定数组{10，20，30},代表一共三个人，整块金条长度为60，金条要分成10，20，30三个部分
+     * 如果先把长度60的金条分成10和50，花费60，再把长度50的金条分成20和30，花费50，一共花费110
+     * 如果先把长度60的金条分成30和30，花费60；再把长度30的金条分成10和20，花费30；一共花费90
+     *
+     * 输入一个数组，返回分割最小的代价
+     */
+
+    /**
+     * 暴力解法
+     *  穷举数组中两个值之和
+     * @return
+     */
+    public static int cutBullion(int[] arr,int sum){
+        if(arr.length == 1){
+            return sum;
+        }
+        int ans = Integer.MAX_VALUE;
+        for(int i = 0;i<arr.length;i++){
+            for(int j = i+1;j<arr.length;j++){
+                ans = Math.min(ans,cutBullion(copyAndMergeTwo(arr,i,j),sum+arr[i]+arr[j]));
+            }
+        }
+        return ans;
+    }
+
+    /**
+     *     将i ，j 两个位置的数 排除后，得到一个新的数组，并将a[i]和a[j]的和 放到数组的最后面
+     */
+    public static int[] copyAndMergeTwo(int[] arr,int i,int j){
+        int[] ans = new int[arr.length - 1];
+        int ansi = 0;
+        for(int arri = 0;arri < arr.length;arri++){
+            if(arri != i && arri != j){
+                ans[ansi++] = arr[arri];
+            }
+        }
+        ans[ansi] = arr[i] + arr[j];
+        return ans;
+    }
+
+    public static int getCost2(int[] bullions){
+         return cutBullion(bullions,0);
+    }
+
+
+    /**
+     * 贪心算法
+     * 将所有部分放入一个小根堆 堆的头节点从小到大 称为小根堆，从大到小，称为大根堆
+     * 每次取出两个值，然后将值相加，再将值放入堆，知道堆中只剩一个元素
+     * @param bullions
+     * @return
+     */
+    public static int getCost(int[] bullions){
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+
+        for (int bullion : bullions) {
+            pq.add(bullion);
+        }
+        int cur = 0;
+        int sum = 0;
+        while(pq.size() > 1){
+            cur = pq.poll() + pq.poll();
+            sum += cur;
+            pq.add(cur);
+        }
+        return sum;
+    }
+
+
+    /**
+     * 输入正数数组costs、正数数组profits、正数K、正数M
+     * costs[i] 表示i号项目的花费
+     * profits[i]表示i号项目在扣除花费之后还能挣到的钱（利润）
+     * K表示你只能串行的最多做K个项目
+     * M表示你初始的资金
+     * 说明：每做完一个项目，马上就获得的收益，可以支持你去做下一个项目
+     * 输出：你最后获得的最大钱数
+     *
+     * 创建一个小根堆（成本），再创建一个大根堆（利润）
+     * 根据启动资金，将小根堆中所有能cover启动资金的节点，然后再push到大根堆中
+     * 再从大根堆中弹出头节点，直到完成K个项目
+     */
+    static class Project{
+        public int p;
+
+        public int c;
+
+        public Project(int p, int c) {
+            this.p = p;
+            this.c = c;
+        }
+    }
+
+    /**
+     *
+     *
+     * @param K 最多只能做K个项目
+     * @param W 启动资金
+     * @param profits 利润
+     * @param captial 成本
+     * @return
+     */
+    public static int getMaxMoney(int K ,int W ,int[] profits,int[] captial){
+        //创建cost 的 小根堆
+        PriorityQueue<Project> cost = new PriorityQueue<Project>(new MinCostComparator());
+        PriorityQueue<Project> profit = new PriorityQueue<>(new MaxProfitComparator());
+        for(int i = 0;i<profits.length;i++){
+            cost.add(new Project(profits[i],captial[i]));
+        }
+        for(int i = 0;i<K;i++){
+            while(!cost.isEmpty() && cost.peek().c <= W){
+                profit.add(cost.poll());
+            }
+            if(profit.isEmpty()){
+                return W;
+            }
+            Project poll = profit.poll();
+            W += poll.p;
+        }
+        return W;
+    }
+
+
+    public static class MinCostComparator implements Comparator<Project>{
+        @Override
+        public int compare(Project o1, Project o2) {
+            return o1.c - o2.c ;
+        }
+    }
+
+    public static class MaxProfitComparator implements Comparator<Project>{
+        @Override
+        public int compare(Project o1, Project o2) {
+            return o2.p - o1.p;
+        }
+    }
+
+
 
 }
