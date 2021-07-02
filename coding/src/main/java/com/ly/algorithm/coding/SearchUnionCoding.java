@@ -15,6 +15,9 @@ import java.util.Stack;
  *    boolean isSameSet(V x,V y)：查询样本x 和样本y是否属于一个集合
  *    void union(V x,V y): 把x和y各自所在的集合的所有样本合并成一个集合
  * 4.isSameSet和union方法的代价越低越好
+ *
+ *
+ * 应用： 解决两大块区域合并的问题 、常用在图等领域中
  * @author Ly
  * @create 2021/7/1 15:17
  * @desc
@@ -60,6 +63,7 @@ public class SearchUnionCoding<V> {
         while(!path.isEmpty()){
             Node<V> pop = path.pop();
             Integer size = sizeMap.get(v);
+            //并查集优化，将并查集链扁平化，最终查询父节点的时间复杂度为0（1）
             parentMap.put(pop,v);
             size++;
             sizeMap.put(v,size);

@@ -50,6 +50,10 @@ public class CodingTest {
         maps.put(++count,"贪心算法-金币切割");
         maps.put(++count,"贪心算法-最大项目资金");
         maps.put(++count,"并查集-查询独立用户");
+        maps.put(++count,"图-宽度优先遍历");
+        maps.put(++count,"图-深度优先遍历");
+        maps.put(++count,"图-拓扑排序算法");
+        maps.put(++count,"图-最小生成树算法之Kruskal");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;

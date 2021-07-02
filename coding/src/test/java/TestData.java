@@ -238,4 +238,107 @@ public class TestData {
         }
         return String.valueOf(ans);
     }
+
+    public static Graph getGraph(){
+        Graph<String> graph = new Graph();
+        GraphNode<String> graphNode1 = new GraphNode();
+        graphNode1.in = 0;
+        graphNode1.out = 2;
+        graphNode1.value = "a";
+        graph.nodes.put(graphNode1.value,graphNode1);
+
+        GraphNode<String> graphNode2 = new GraphNode();
+        graphNode2.in = 1;
+        graphNode2.out = 2;
+        graphNode2.value = "b";
+        graph.nodes.put(graphNode2.value,graphNode2);
+
+        GraphNode<String> graphNode3 = new GraphNode();
+        graphNode3.in = 1;
+        graphNode3.out = 1;
+        graphNode3.value = "c";
+        graph.nodes.put(graphNode3.value,graphNode3);
+
+        GraphNode<String> graphNode4 = new GraphNode();
+        graphNode4.in = 1;
+        graphNode4.out = 1;
+        graphNode4.value = "d";
+        graph.nodes.put(graphNode4.value,graphNode4);
+
+        GraphNode<String> graphNode5 = new GraphNode();
+        graphNode4.in = 3;
+        graphNode4.out = 0;
+        graphNode5.value = "e";
+        graph.nodes.put(graphNode5.value,graphNode5);
+
+        GraphEdge graphEdge = new GraphEdge();
+        graphEdge.weight = 1;
+        GraphEdge graphEdge2 = new GraphEdge();
+        graphEdge2.weight = 2;
+        GraphEdge graphEdge3 = new GraphEdge();
+        graphEdge3.weight = 3;
+        GraphEdge graphEdge20 = new GraphEdge();
+        graphEdge20.weight = 20;
+        GraphEdge graphEdge50 = new GraphEdge();
+        graphEdge50.weight = 50;
+        GraphEdge graphEdge100 = new GraphEdge();
+        graphEdge100.weight = 100;
+
+        List<GraphEdge> totalEdge = Lists.newArrayList();
+
+        List<GraphNode> nexts1 = Lists.newArrayList();
+        List<GraphEdge> edges1 = Lists.newArrayList();
+        nexts1.add(graphNode2);
+        nexts1.add(graphNode5);
+        graphNode1.nexts = nexts1;
+        graphNode1.edges = edges1;
+        edges1.add(graphEdge);
+        totalEdge.add(graphEdge);
+        graphEdge.from = graphNode1;
+        graphEdge.to = graphNode2;
+        edges1.add(graphEdge100);
+        totalEdge.add(graphEdge100);
+        graphEdge100.from = graphNode1;
+        graphEdge100.to  = graphNode5;
+
+
+        List<GraphEdge> edges2 = Lists.newArrayList();
+        edges2.add(graphEdge2);
+        totalEdge.add(graphEdge2);
+        edges2.add(graphEdge50);
+        totalEdge.add(graphEdge50);
+        List<GraphNode> nexts2 = Lists.newArrayList();
+        nexts2.add(graphNode3);
+        nexts2.add(graphNode5);
+        graphNode2.nexts = nexts2;
+        graphNode2.edges = edges2;
+        graphEdge2.from = graphNode2;
+        graphEdge2.to = graphNode3;
+        graphEdge50.from = graphNode2;
+        graphEdge50.to = graphNode5;
+
+        List<GraphEdge> edges3 = Lists.newArrayList();
+        edges3.add(graphEdge3);
+        totalEdge.add(graphEdge3);
+        List<GraphNode> nexts3 = Lists.newArrayList();
+        nexts3.add(graphNode4);
+        graphNode3.nexts = nexts3;
+        graphNode3.edges = edges3;
+        graphEdge3.from = graphNode3;
+        graphEdge3.to = graphNode4;
+
+
+        List<GraphEdge> edges4 = Lists.newArrayList();
+        edges4.add(graphEdge20);
+        totalEdge.add(graphEdge20);
+        List<GraphNode> nexts4 = Lists.newArrayList();
+        nexts4.add(graphNode5);
+        graphNode4.nexts = nexts4;
+        graphNode4.edges = edges4;
+        graphEdge20.from = graphNode4;
+        graphEdge20.to = graphNode5;
+
+        graph.edges.addAll(totalEdge);
+        return graph;
+    }
 }
