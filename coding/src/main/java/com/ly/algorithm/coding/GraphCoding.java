@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import com.ly.algorithm.Graph;
 import com.ly.algorithm.GraphEdge;
 import com.ly.algorithm.GraphNode;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.*;
 
@@ -144,5 +145,72 @@ public class GraphCoding {
         public int compare(GraphEdge o1, GraphEdge o2) {
             return o1.weight - o2.weight;
         }
+    }
+
+    /**
+     * 最小生成树算法只psim
+     * 1.任意从图中选择一个点出发
+     * 2.解锁当前点的所有出度边
+     * 3.从所有边中找到权重最小的一条边
+     * 4.找到权重最小的那条边对应的点，并解锁这个点
+     * 5.直到所有点都被解锁，再移除不需要的边
+     * @param graph
+     * @return
+     */
+    public static List<GraphEdge> psim(Graph graph){
+        List<GraphNode> values = Lists.newArrayList( graph.nodes.values());
+        GraphNode firstNode = values.get(0);
+        Stack<GraphNode> stacks = new Stack<>();
+        stacks.push(firstNode);
+        List<GraphNode> nodes = Lists.newArrayList();
+        nodes.add(firstNode);
+        List<GraphEdge> results = Lists.newArrayList();
+        while(!stacks.isEmpty()){
+            GraphNode pop = stacks.pop();
+            List<GraphEdge> edges = pop.edges;
+            if(CollectionUtils.isEmpty(edges)){
+                break;
+            }
+            Collections.sort(edges,new EdgeComparator());
+            for (GraphEdge edge : edges) {
+                if(!nodes.contains(edge.to)){
+                    nodes.add(edge.to);
+                    stacks.push(edge.to);
+                    results.add(edge);
+                    break;
+                }
+            }
+        }
+        return results;
+    }
+
+    /**
+     * 使用小根堆实现
+     * @param graph
+     * @return
+     */
+    public static List<GraphEdge> psim2(Graph graph){
+        PriorityQueue<GraphEdge> priorityQueue = new PriorityQueue<>(new EdgeComparator());
+        Set<GraphNode> nodeSets = Sets.newHashSet();
+        Set<GraphEdge> results = Sets.newHashSet();
+        GraphNode node = (GraphNode)Lists.newArrayList(graph.nodes.values()).get(0);
+        if(!nodeSets.contains(node)){
+            nodeSets.add(node);
+            for (GraphEdge edge : (List<GraphEdge>)node.edges) {
+                priorityQueue.add(edge);
+            }
+            while(!priorityQueue.isEmpty()){
+                GraphEdge edge = priorityQueue.poll();
+                GraphNode toNode = edge.to;
+                if(!nodeSets.contains(toNode)){
+                    nodeSets.add(toNode);
+                    results.add(edge);
+                    for (GraphEdge nextEdge : (List<GraphEdge>)node.edges) {
+                        priorityQueue.add(nextEdge);
+                    }
+                }
+            }
+        }
+        return Lists.newArrayList(results);
     }
 }

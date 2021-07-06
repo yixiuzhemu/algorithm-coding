@@ -21,4 +21,13 @@ public class GraphCodingTest {
         }
     }
 
+
+    @Test
+    public void testPsim(){
+        Graph graph = TestData.getGraph();
+        List<GraphEdge> psim = GraphCoding.psim(graph);
+        for (GraphEdge  graphEdge : psim) {
+            System.out.println(" "+graphEdge.weight+",");
+        }
+    }
 }
