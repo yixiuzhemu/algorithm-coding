@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.ly.algorithm.Graph;
 import com.ly.algorithm.GraphEdge;
+import com.ly.algorithm.GraphHeap;
 import com.ly.algorithm.GraphNode;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -159,27 +160,30 @@ public class GraphCoding {
      */
     public static List<GraphEdge> psim(Graph graph){
         List<GraphNode> values = Lists.newArrayList( graph.nodes.values());
-        GraphNode firstNode = values.get(0);
-        Stack<GraphNode> stacks = new Stack<>();
-        stacks.push(firstNode);
-        List<GraphNode> nodes = Lists.newArrayList();
-        nodes.add(firstNode);
         List<GraphEdge> results = Lists.newArrayList();
-        while(!stacks.isEmpty()){
-            GraphNode pop = stacks.pop();
-            List<GraphEdge> edges = pop.edges;
-            if(CollectionUtils.isEmpty(edges)){
-                break;
-            }
-            Collections.sort(edges,new EdgeComparator());
-            for (GraphEdge edge : edges) {
-                if(!nodes.contains(edge.to)){
-                    nodes.add(edge.to);
-                    stacks.push(edge.to);
-                    results.add(edge);
+        //去掉break后，可防森林
+        for (GraphNode value : values) {
+            Stack<GraphNode> stacks = new Stack<>();
+            stacks.push(value);
+            List<GraphNode> nodes = Lists.newArrayList();
+            nodes.add(value);
+            while(!stacks.isEmpty()){
+                GraphNode pop = stacks.pop();
+                List<GraphEdge> edges = pop.edges;
+                if(CollectionUtils.isEmpty(edges)){
                     break;
                 }
+                Collections.sort(edges,new EdgeComparator());
+                for (GraphEdge edge : edges) {
+                    if(!nodes.contains(edge.to)){
+                        nodes.add(edge.to);
+                        stacks.push(edge.to);
+                        results.add(edge);
+                        break;
+                    }
+                }
             }
+            break;
         }
         return results;
     }
@@ -192,25 +196,111 @@ public class GraphCoding {
     public static List<GraphEdge> psim2(Graph graph){
         PriorityQueue<GraphEdge> priorityQueue = new PriorityQueue<>(new EdgeComparator());
         Set<GraphNode> nodeSets = Sets.newHashSet();
-        Set<GraphEdge> results = Sets.newHashSet();
-        GraphNode node = (GraphNode)Lists.newArrayList(graph.nodes.values()).get(0);
-        if(!nodeSets.contains(node)){
-            nodeSets.add(node);
-            for (GraphEdge edge : (List<GraphEdge>)node.edges) {
-                priorityQueue.add(edge);
-            }
-            while(!priorityQueue.isEmpty()){
-                GraphEdge edge = priorityQueue.poll();
-                GraphNode toNode = edge.to;
-                if(!nodeSets.contains(toNode)){
-                    nodeSets.add(toNode);
-                    results.add(edge);
-                    for (GraphEdge nextEdge : (List<GraphEdge>)node.edges) {
-                        priorityQueue.add(nextEdge);
+        List<GraphEdge> results = Lists.newArrayList();
+        List<GraphNode> values = Lists.newArrayList(graph.nodes.values());
+        Set<GraphEdge> existEdges = Sets.newHashSet();
+        //防森林
+        for (GraphNode node : values) {
+            if(!nodeSets.contains(node)){
+                nodeSets.add(node);
+                for (GraphEdge edge : (List<GraphEdge>)node.edges) {
+                    priorityQueue.add(edge);
+                }
+                while(!priorityQueue.isEmpty()){
+                    GraphEdge edge = priorityQueue.poll();
+                    GraphNode toNode = edge.to;
+                    if(!nodeSets.contains(toNode)){
+                        nodeSets.add(toNode);
+                        results.add(edge);
+                        if(CollectionUtils.isEmpty(toNode.edges)){
+                            break;
+                        }
+                        for (GraphEdge nextEdge : (List<GraphEdge>)toNode.edges) {
+                            if(!existEdges.contains(nextEdge)){
+                                priorityQueue.add(nextEdge);
+                                existEdges.add(nextEdge);
+                            }
+
+                        }
                     }
                 }
             }
+            break;
         }
-        return Lists.newArrayList(results);
+
+        return results;
+    }
+
+    /**
+     * 迪瑞特斯拉算法
+     * 1.默认不允许出现权重为负数的边
+     * 2.必须给出一个出发点
+     * 3.如果存在某个点无法到达，则距离为正无穷
+     * 4.将所有点先放入一个Map中，其中除了出发点的距离为0，其它点的距离都为正无穷
+     * 5.从出发点开始往外跳，计算出能到达的点的距离，计算完成后，选出距离最小的一个节点为下一跳，并且当前节点不再使用
+     * 6.直到整个Map遍历结束
+     * @param head
+     * @return
+     */
+    public static Map<GraphNode,Integer> dijkstra(GraphNode head){
+        Map<GraphNode,Integer> distanceMap = Maps.newHashMap();
+        distanceMap.put(head,0);
+        Set<GraphNode> useNode = Sets.newHashSet();
+        GraphNode minNode = getMinNode(distanceMap, useNode);
+        while(minNode != null){
+            List<GraphEdge> edges = minNode.edges;
+            Integer minDistance = distanceMap.get(minNode);
+            if(CollectionUtils.isNotEmpty(edges)){
+                for (GraphEdge edge : edges) {
+                    Integer distance = distanceMap.get(edge.to);
+                    if(distance == null || distance > minDistance + edge.weight){
+                        distanceMap.put(edge.to,minDistance+edge.weight);
+                    }
+                }
+            }
+            minNode = getMinNode(distanceMap,useNode);
+        }
+        return distanceMap;
+    }
+
+    private static GraphNode getMinNode(Map<GraphNode,Integer> distanceMap,Set<GraphNode> useNode){
+        GraphNode minNode = null;
+        Integer minDistance = -1;
+        for (GraphNode graphNode : distanceMap.keySet()) {
+            if(!useNode.contains(graphNode)){
+                Integer distance = distanceMap.get(graphNode);
+                if(minDistance < 0 || minDistance > distance){
+                    minDistance = distance;
+                    minNode = graphNode;
+                }
+            }
+        }
+        useNode.add(minNode);
+       return minNode;
+    }
+
+    /**
+     * 迪瑞特斯拉算法利用定制化小根堆进行优化
+     * @param head
+     * @param size
+     * @return
+     */
+    public static Map<GraphNode,Integer> dijkstra2(GraphNode head,int size){
+        GraphHeap graphNodeHeap = new GraphHeap(size);
+        graphNodeHeap.addOrUpdateOrIgnore(head,0);
+        Map<GraphNode,Integer> result = Maps.newHashMap();
+        while(!graphNodeHeap.isEmpty()){
+            GraphHeap.NodeRecord record = graphNodeHeap.pop();
+            GraphNode node = record.node;
+            int distance = record.distance;
+            List<GraphEdge> edges = node.edges;
+            if(CollectionUtils.isNotEmpty(edges)){
+                for (GraphEdge edge : edges) {
+                    graphNodeHeap.addOrUpdateOrIgnore(edge.to,distance+edge.weight);
+                }
+            }
+            result.put(node,distance);
+        }
+        return result;
     }
 }

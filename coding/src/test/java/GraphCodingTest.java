@@ -1,5 +1,7 @@
+import com.google.common.collect.Lists;
 import com.ly.algorithm.Graph;
 import com.ly.algorithm.GraphEdge;
+import com.ly.algorithm.GraphNode;
 import com.ly.algorithm.coding.GraphCoding;
 import org.junit.Test;
 
@@ -29,5 +31,16 @@ public class GraphCodingTest {
         for (GraphEdge  graphEdge : psim) {
             System.out.println(" "+graphEdge.weight+",");
         }
+        List<GraphEdge> psim2 = GraphCoding.psim2(graph);
+        for (GraphEdge  graphEdge : psim2) {
+            System.out.println(" "+graphEdge.weight+",");
+        }
+    }
+
+    @Test
+    public void testDijkstra(){
+        Graph graph = TestData.getGraph();
+        GraphCoding.dijkstra((GraphNode) Lists.newArrayList(graph.nodes.values()).get(0));
+        GraphCoding.dijkstra2((GraphNode) Lists.newArrayList(graph.nodes.values()).get(0),5);
     }
 }

@@ -55,6 +55,7 @@ public class CodingTest {
         maps.put(++count,"图-拓扑排序算法");
         maps.put(++count,"图-最小生成树算法之Kruskal");
         maps.put(++count,"图-最小生成树算法之psim");
+        maps.put(++count,"图-最小生成树算法之dijkstra及其优化写法");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;
