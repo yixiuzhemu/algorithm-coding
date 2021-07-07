@@ -39,6 +39,10 @@ public class GraphHeap {
         nodes[index2] = tmp;
     }
 
+    /**
+     * 新增节点与父节点进行比较，如果距离小于父节点的距离，则交换父子节点
+     * @param index
+     */
     private void heapInsert(int index){
         int parent = (index - 1) >> 1;
         while(parent >= 0 && distanceMap.get(nodes[index]) < distanceMap.get(nodes[parent])){
@@ -48,6 +52,10 @@ public class GraphHeap {
         }
     }
 
+    /**
+     * 从指定位置 与子节点进行比较，将index的值放到该放的位置
+     * @param index
+     */
     private void heapify(int index){
         int left = (index << 1) + 1;
         while(left + 1< size){
@@ -63,6 +71,11 @@ public class GraphHeap {
     }
 
 
+    /***
+     * 新增 更新或者忽略节点的距离
+     * @param node
+     * @param distance
+     */
     public void addOrUpdateOrIgnore(GraphNode node,int distance){
         if(!indexMap.containsKey(node)){
             nodes[size] = node;
@@ -75,6 +88,10 @@ public class GraphHeap {
         }
     }
 
+    /**
+     * 弹出时，将头节点弹出，并将最后一个节点放到头节点再进行heapify操作。
+     * @return
+     */
     public NodeRecord pop(){
         if(isEmpty()){
             return  null;
