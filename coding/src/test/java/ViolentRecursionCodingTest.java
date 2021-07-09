@@ -1,0 +1,64 @@
+import com.alibaba.fastjson.JSON;
+import com.ly.algorithm.coding.ViolentRecursionCoding;
+import org.junit.Test;
+
+import java.util.Stack;
+
+/**
+ * @author Ly
+ * @create 2021/7/7 16:19
+ * @desc
+ **/
+public class ViolentRecursionCodingTest {
+
+    @Test
+    public void testHanoi(){
+        ViolentRecursionCoding.hanoi1(3);
+        System.out.println("--------------------------------------------");
+        ViolentRecursionCoding.hanoi2(4);
+        System.out.println("--------------------------------------------");
+        ViolentRecursionCoding.hanoi3(4);
+    }
+
+    @Test
+    public void reverseStack(){
+        Stack stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        ViolentRecursionCoding.reverse(stack);
+        System.out.println("reverse:"+ JSON.toJSONString(stack));
+    }
+
+    @Test
+    public void testSubsequence(){
+        ViolentRecursionCoding.printSubsequence("aaa");
+        System.out.println("--------------------------------------------");
+        ViolentRecursionCoding.printSubsequence2("aaa");
+        System.out.println("--------------------------------------------");
+        ViolentRecursionCoding.printSubsequence3("abcd");
+    }
+
+    @Test
+    public void testConvertString(){
+        ViolentRecursionCoding.convertString("11126");
+    }
+
+    @Test
+    public void testMaxPrice(){
+        int[] weights = new int[]{10,5,20,200,30,100,150,26,46,12,57};
+        int[] values = new int[]{5,3,10,140,15,50,150,13,23,6,28};
+        int maxPrice = ViolentRecursionCoding.getMaxPrice(weights, values, 200);
+        int maxPrice2 = ViolentRecursionCoding.getMaxPrice2(weights, values, 200);
+        System.out.println("能够装的货物的最大价值为："+maxPrice);
+        System.out.println("能够装的货物的最大价值为："+maxPrice2);
+    }
+
+
+    @Test
+    public void testMaxScore(){
+        int[] arr = new int[]{10,5,20,200,30,100,150,26,46,12,57};
+        int win = ViolentRecursionCoding.getMaxScore(arr);
+        System.out.println("赢家能获得的最大分数为："+win);
+    }
+}

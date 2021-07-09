@@ -56,6 +56,12 @@ public class CodingTest {
         maps.put(++count,"图-最小生成树算法之Kruskal");
         maps.put(++count,"图-最小生成树算法之psim");
         maps.put(++count,"图-最小生成树算法之dijkstra及其优化写法");
+        maps.put(++count,"暴力递归-汉诺塔问题");
+        maps.put(++count,"暴力递归-逆序栈");
+        maps.put(++count,"暴力递归-左右模型-字符串子序列");
+        maps.put(++count,"暴力递归-左右模型-数字字符串转换为字符字符串");
+        maps.put(++count,"暴力递归-左右模型-背包问题");
+        maps.put(++count,"暴力递归-范围模型-拿牌问题");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;
