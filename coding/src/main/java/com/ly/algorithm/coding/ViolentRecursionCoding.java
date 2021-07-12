@@ -1,9 +1,11 @@
 package com.ly.algorithm.coding;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -465,7 +467,7 @@ public class ViolentRecursionCoding {
     }
 
     /**
-     * N 皇后
+     * N皇后
      * N皇后问题是指在N*N的棋盘上要摆N个皇后，。
      * 要求任何两个皇后不同行、不同列，也不在同一条斜线上
      * 给定一个整数n,返回n皇后的摆法有多少种
@@ -473,5 +475,174 @@ public class ViolentRecursionCoding {
      * n=2或3 2皇后和3皇后问题怎么摆都不行，返回0
      * n=8，返回92
      */
+
+    public static void nQueen(int n){
+        long start = System.currentTimeMillis();
+        int queen = queen(0, new int[n], n);
+        long end = System.currentTimeMillis();
+        System.out.println(n+"个皇后的摆法一共有："+queen+"种!耗时"+(end-start)+"ms");
+    }
+
+    /**
+     *
+     * @param i 表示第i行
+     * @param records 已经放了皇后的行，潜台词表示i行之前已经全部放好了皇后
+     * @param n 一共需要放几个皇后
+     * @return
+     */
+    public static int queen(int i,int[] records,int n){
+        if(i == n){
+            return 1;
+        }
+        int res = 0;
+        for(int j = 0;j<n;j++){
+            if(validateQueen(records,i,j)){
+                records[i] = j;
+                res += queen(i+1,records,n);
+            }
+        }
+        return res;
+    }
+
+    private static Boolean validateQueen( int[] records,int i,int j){
+        for(int k = 0;k < i;k++){
+            if(Math.abs(i-k) == Math.abs(records[k] - j) || records[k] == j){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * n皇后动态规划解法，请不要超过32皇后问题
+     */
+    public static void nQueen2(int n){
+        if(n < 1 || n > 32){
+            return;
+        }
+        long start = System.currentTimeMillis();
+        //最多允许计算32皇后以内的问题，然后将右侧全部设置为1，1表示放置的皇后
+        int limit = n == 32 ? -1 : (1 << n) - 1;
+        int queen = queen(limit, 0, 0, 0);
+        long end = System.currentTimeMillis();
+        System.out.println(n+"个皇后的摆法一共有："+ queen +"种!耗时"+(end-start)+"ms");
+    }
+
+    /**
+     * 时间复杂度仍是N的N次方，只是减少了常数时间
+     * @param limit 皇后放置的位置的限制
+     * @param col 列限制，表示当前哪些列放了皇后
+     * @param left 列左斜线限制，表示当前列左斜线上的限制
+     * @param right 列右斜线限制，表示当前列右斜线上的限制
+     * @return
+     */
+    public static int queen(int limit,int col,int left,int right){
+        //如果当前列限制 上已经全部放满1 ，那么表示成功得到方案
+        if(limit == col){
+            return 1;
+        }
+        //获取能够放置皇后的位置，
+        //(col | left | right) 获得所有已经被使用的位置
+        //~(col | left | right) 获取可以使用的位置
+
+        //(~(col | left | right)) & limit，则可以把有效位以外的1全部变为0，避免干扰结果
+        int pos = (~(col | left | right)) & limit;
+        int res = 0;
+        //尝试位置上的每一个1（取二进制位上的最右侧的1，自己与上自己取反结果加一的结果）
+        while(pos != 0){
+            int mostRightOne = pos & (~pos + 1);
+            // 等同于 pos = pos - mostRightOne;
+            pos ^= mostRightOne;
+            res += queen(limit,
+                    (col | mostRightOne),
+                    //当前左侧的限制 或上 当前位置的结果，再集体左移一位，即为当前的左列限制
+                    (left | mostRightOne) << 1,
+                    //当前右侧的限制 或上当前位置的结果，再集体右移一位，即为当前的右列限制
+                    (right | mostRightOne) >> 1);
+        }
+        return res;
+    }
+
+    /**
+     * 机器人移动
+     * 假设有排成一行的N个位置，记为1~N，N一定大于或等于2
+     * 开始时机器人在其中的M位置上（M一定是1~N种的一个）
+     * 如果机器人来到1位置，那么下一步只能往右来到2位置
+     * 如果机器人来到N位置，那么下一步只能往左来到N-1位置
+     * 如果机器人来到中间位置，那么下一步可以往左走或者往右走
+     * 规定机器人必须走K步，最终能来到P位置的方法有多少种
+     * 给定4个参数N、M、K、P,返回方法数
+     */
+    public static int move(int N,int M,int K,int P){
+        //如果当前位置距离P超过可移动距离，那么一定无法到达
+        if(Math.abs(P-M) > K){
+            return 0;
+        }
+        //如果已经无法移动了，但是没有移动到P位置，那么移动失败
+        if(K == 0 && M != P){
+            return 0;
+        }
+        if(M == P && K == 0){
+            return 1;
+        }
+        int res = 0;
+        //如果机器人来到1位置，那么下一步只能往右来到2位置
+        if(M == 1){
+            res += move(N,M+1,K-1,P);
+        } else if(M == N){
+            //如果机器人来到N位置，那么下一步只能往左来到N-1位置
+            res += move(N,M-1,K-1,P);
+        }else{
+            //如果机器人来到中间位置，那么下一步可以往左走或者往右走
+            res += move(N,M+1,K-1,P);
+            res += move(N,M-1,K-1,P);
+        }
+        return res;
+    }
+
+    public static int move2(int N,int M,int K,int P){
+        int[][] dp = new int[N+1][K+1];
+        for(int i = 0;i<N+1;i++){
+            for(int j = 0;j<K+1;j++){
+                dp[i][j] = -1;
+            }
+        }
+        return m1(N,M,K,P,dp);
+    }
+
+    public static int m1(int N,int M,int K,int P,int[][] dp){
+        if(dp[M][K] != -1){
+            return dp[M][K];
+        }
+        //如果当前位置距离P超过可移动距离，那么一定无法到达
+        if(Math.abs(P-M) > K){
+            return 0;
+        }
+        //如果已经无法移动了，但是没有移动到P位置，那么移动失败
+        if(K == 0 && M != P){
+            return 0;
+        }
+        if(M == P && K == 0){
+            return 1;
+        }
+        int res = 0;
+
+        //如果机器人来到1位置，那么下一步只能往右来到2位置
+        if(M == 1){
+            res += move(N,M+1,K-1,P);
+        } else if(M == N){
+            //如果机器人来到N位置，那么下一步只能往左来到N-1位置
+            res += move(N,M-1,K-1,P);
+        }else{
+            //如果机器人来到中间位置，那么下一步可以往左走或者往右走
+            res += move(N,M+1,K-1,P);
+            res += move(N,M-1,K-1,P);
+        }
+        dp[M][K] = res;
+        return res;
+    }
+
+
+
 
 }

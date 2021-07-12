@@ -61,4 +61,18 @@ public class ViolentRecursionCodingTest {
         int win = ViolentRecursionCoding.getMaxScore(arr);
         System.out.println("赢家能获得的最大分数为："+win);
     }
+
+    @Test
+    public void testQueen(){
+        ViolentRecursionCoding.nQueen(15);
+        ViolentRecursionCoding.nQueen2(15);
+    }
+
+    @Test
+    public void testMove(){
+        int move = ViolentRecursionCoding.move(7, 3, 3, 2);
+        int move2 = ViolentRecursionCoding.move2(7, 3, 3, 2);
+        System.out.println("机器人一共有"+move+"种移动方法");
+        System.out.println("机器人一共有"+move2+"种移动方法");
+    }
 }

@@ -62,6 +62,9 @@ public class CodingTest {
         maps.put(++count,"暴力递归-左右模型-数字字符串转换为字符字符串");
         maps.put(++count,"暴力递归-左右模型-背包问题");
         maps.put(++count,"暴力递归-范围模型-拿牌问题");
+        maps.put(++count,"暴力递归-N皇后问题(及优化)");
+        maps.put(++count,"暴力递归-机器人移动");
+        maps.put(++count,"动态规划-机器人移动");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;
