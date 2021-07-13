@@ -75,4 +75,12 @@ public class ViolentRecursionCodingTest {
         System.out.println("机器人一共有"+move+"种移动方法");
         System.out.println("机器人一共有"+move2+"种移动方法");
     }
+
+    @Test
+    public void testPriceCount(){
+        int[] ints = new int[]{100,50};
+        int price =200;
+        int count2 = ViolentRecursionCoding.getPriceCount2(ints,price);
+        System.out.println("一共有"+count2+"种方法");
+    }
 }

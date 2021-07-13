@@ -65,6 +65,13 @@ public class CodingTest {
         maps.put(++count,"暴力递归-N皇后问题(及优化)");
         maps.put(++count,"暴力递归-机器人移动");
         maps.put(++count,"动态规划-机器人移动");
+        maps.put(++count,"动态规划-字符串的全部子序列");
+        maps.put(++count,"动态规划-数字字符串转换为字符字符串");
+        maps.put(++count,"动态规划-拿牌问题");
+        maps.put(++count,"暴力递归-凑金额");
+        maps.put(++count,"记忆化搜索-凑金额");
+        maps.put(++count,"动态规划-凑金额");
+        maps.put(++count,"记忆化搜索 - 贴纸");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;

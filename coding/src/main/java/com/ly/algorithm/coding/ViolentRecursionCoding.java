@@ -322,6 +322,7 @@ public class ViolentRecursionCoding {
     }
 
     /**
+     * 数字字符串转换为字符字符串
      * 从左往右的尝试模型1
      * 规定1和A对应、2和B对应、3和C对应。。。。
      * 那么一个数字字符串比如“111”就可以转化为“AAA”、“KA"和”AK“
@@ -643,6 +644,24 @@ public class ViolentRecursionCoding {
     }
 
 
+    /**
+     * 凑金额
+     * 给定一个数组，数组中代表金额，每一个金额都有无数张，且数组中的金额不重复
+     * 现在给定一个金额，请问数组中有多少种方法可以刚好等于该金额
+     * [70,30,100,50]  1000
+     */
+    public static int getPriceCount2(int[] prices,int price){
+        return price(prices,0,price);
+    }
 
-
+    public static int price(int[] prices,int index,int price){
+        if(index >= prices.length){
+            return price == 0 ? 1 : 0;
+        }
+        int res = 0;
+        for(int i = 0;prices[index] * i <= price;i++ ){
+            res+= price(prices,index+1,price - (prices[index] * i));
+        }
+        return res;
+    }
 }
