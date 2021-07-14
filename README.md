@@ -1,39 +1,39 @@
-># com.ly.algorithm-coding
+> #com.ly.algorithm-coding
 >>>some alorithm's coding
 
->#[一、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
->>##1、暴力递归就是尝试 
+> #[一、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
+>> ##1、暴力递归就是尝试 
 >>>* (1).把问题转化为规模缩小了的同类问题的子问题
 >>>* (2).有明确的不需要进行递归的条件（base case）
 >>>* (3).有当得到了子问题的结果之后的决策过程
 >>>* (4).不记录每一个子问题的解 
   
->>##2、什么样的暴力递归可以优化
+>> ##2、什么样的暴力递归可以优化
 >>>* (1).有重复调用同一个子问题的解，这种递归可以优化
 >>>* (2).如果每一个子问题都是不同的解，无法优化
   
->>##3、面试中设计暴力递归过程的原则
+>> ##3、面试中设计暴力递归过程的原则
 >>>* (1).每一个可变参数的类型，一定不要比int类型更加复杂
 >>>* (2).原则1可以违法，让类型突破到一维线性结构，那必须是唯一可变参数
 >>>* (3).如果发现原则1被违反，但不违反原则2，只需要做到记忆化搜索即可
 >>>* (4).可变参数的个数，能少则少
 
->>##4、知道了面试中设计暴力递归过程的原则，然后呢？
+>> ##4、知道了面试中设计暴力递归过程的原则，然后呢？
 >>>* (1).一定要逼自己找到不违反原则情况下的暴力尝试
 >>>* (2).如果你找到的暴力尝试，不符合原则，马上舍弃，找新的
 >>>* (3).如果某个提莫突破了设计原则， 一定极难极难，面试中出现概率低于5%
       
->>##5、如何分析有没有重复解
+>> ## 5、如何分析有没有重复解
 >>>* (1).列出调用过程，可以只列出前几层
 >>>* (2).有没有重复解，一看便知
       
->>##6、暴力递归常见的4中模型
+>> ##6、暴力递归常见的4中模型
 >>>* (1).从左往右的尝试模型
 >>>* (2).范围上的尝试模型
 >>>* (3).多样本位置全对应的尝试模型
 >>>* (4).寻找业务限制的尝试模型
 
->>##[7、暴力递归常见的题型](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
+>> ##[7、暴力递归常见的题型](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
 >>>* [(1).汉诺塔](hanoi1 "hanoi1、hanoi2、hanoi3")
 >>>* [(2).逆序栈](reverse "reverse")
 >>>* [(3).打印一个字符串的全部子序列](printSubsequence "printSubsequence")
@@ -44,24 +44,24 @@
 >>>* [(8).机器人移动](move "move")
 >>>* [(9).凑金额](getPriceCount2 "getPriceCount2")
 
->#[二、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
->>##1、如何找到某个问题的动态规划方式
+> #[二、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
+>> ##1、如何找到某个问题的动态规划方式
 >>>* (1).设计暴力递归：重要原则+4中常见尝试模型
 >>>* (2).分析有没有重复解：套路解决
 >>>* (3).用记忆化搜索——>用严格表结构实现动态规划，套路解决
 >>>* (4).看是否能继续优化，套路解决
 
->>##2、暴力递归和动态规划的关系
+>> ##2、暴力递归和动态规划的关系
 >>>* (1).某一个暴力递归，有解的重复调用，就可以把这个暴力递归优化成动态规划
 >>>* (2).任何动态规划问题，都一定对应着某一个有解的重复调用的暴力递归
 >>>* (3).但不是所有的暴力递归，都一定对应着动态规划
 
->>##3、面试题和动态规划的关系
+>> ##3、面试题和动态规划的关系
 >>>* (1).解决一个问题，可能有很多尝试方法
 >>>* (2).可能在很多尝试方法中，又有若干个尝试方法有动态规划的方式
 >>>* (3).一个问题可能有若干种动态规划的解法
 
->>##4、暴力递归到动态规划的套路
+>> ##4、暴力递归到动态规划的套路
 >>>* (1).你已经有了一个不违反原则的暴力递归，而且的确存在解的重复调用
 >>>* (2).找到哪些参数的变化会影响返回值，对每一个参数列出变化范围
 >>>* (3).参数间的所有的组合数量，意味着表大小
@@ -69,13 +69,13 @@
 >>>* (5).规定好严格表的大小，分析位置的依赖顺序，然后从基础填写到最终解
 >>>* (6).对于有枚举行为的决策过程，进一步优化
 
->>##5、动态规划的进一步优化
+>> ##5、动态规划的进一步优化
 >>>* (1).空间压缩
 >>>* (2).状态化简
 >>>* (3).四边形不等式
 >>>* (4).其它优化技巧略
 
->>##[6、动态规划常见题型](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
+>> ##[6、动态规划常见题型](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
 >>>* [(1).机器人移动](move "move")
 >>>* [(2).背包问题](getMaxPrice "getMaxPrice")
 >>>* [(3).打印一个字符串的全部子序列](printSubsequence "printSubsequence")
@@ -85,19 +85,19 @@
 >>>* [(7).贴纸(记忆化搜索 最优解)](getStickerStr1 "getStickerStr1")
 
       
->#[三、图](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java")
->>##[1、图](GraphCoding.java "GraphCoding.java")
+> #[三、图](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java")
+>> ##[1、图](GraphCoding.java "GraphCoding.java")
 >>>* (1).由点的集合和边的集合构成
 >>>* (2).虽然存在有向图和无向图的概念，但实际上都可以用有向图来表达
 >>>* (3).边上可能带有权值
       
->>##[2、图的宽度优先遍历](width "width")
+>> ##[2、图的宽度优先遍历](width "width")
 >>>* (1).利用队列实现
 >>>* (2).从源节点开始依次按照宽度进队列，然后弹出
 >>>* (3).每弹出一个点，把该节点所有没有进过队列的邻接节点加入队列
 >>>* (4).直到队列变空
 
->>##[3、的深度优先遍历](height "height")
+>> ##[3、的深度优先遍历](height "height")
 >>>* (1).利用栈实现
 >>>* (2).从源节点开始把节点按照深度放入栈，然后弹出
 >>>* (3).每弹出一个点，把该节点下一个没有进过栈的邻接点放入栈
@@ -110,14 +110,14 @@
 >>>* 要求：有向图切其中没有环
 >>>* 应用：事件安排、编译顺序
   
->>##[5、最小生成树算法之Kruskal](kruskal "kruskal")
+>> ##[5、最小生成树算法之Kruskal](kruskal "kruskal")
 >>>* (1).总是从权值最小的边开始考虑，依次考察权值依次变大的边
 >>>* (2).当前的边要么进入最小生成树的集合，要么丢弃
 >>>* (3).如果当前的边进入最小生成树的集合中不会形成环，就要当前边
 >>>* (4).如果当前的边进入最小生成树的集合中会形成环，就不要当前边
 >>>* (5).考察完所有边之后，最小生成树的集合也得到了
   
->>##[6、最小生成树算法之psim](psim "psim") 
+>> ##[6、最小生成树算法之psim](psim "psim") 
 >>>* (1).任意从图中选择一个点出发
 >>>* (2).解锁当前点的所有出度边
 >>>* (3).从所有边中找到权重最小的一条边
@@ -125,7 +125,7 @@
 >>>* (5).直到所有点都被解锁，再移除不需要的边
 >>>* (6).[使用小根堆实现](psim2 "psim2")
   
->>##[7、迪瑞特斯拉算法](dijkstra "dijkstra")
+>> ##[7、迪瑞特斯拉算法](dijkstra "dijkstra")
 >>>* (1).默认不允许出现权重为负数的边
 >>>* (2).必须给出一个出发点
 >>>* (3).如果存在某个点无法到达，则距离为正无穷
