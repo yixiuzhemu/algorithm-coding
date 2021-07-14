@@ -2,8 +2,6 @@ package com.ly.algorithm;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * stack str
  * @author Ly

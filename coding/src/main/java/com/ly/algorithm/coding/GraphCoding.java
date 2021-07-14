@@ -29,7 +29,7 @@ public class GraphCoding {
      * 1.利用队列实现
      * 2.从源节点开始依次按照宽度进队列，然后弹出
      * 3.每弹出一个点，把该节点所有没有进过队列的邻接节点加入队列
-     * 4.知道队列变空
+     * 4.直到队列变空
      */
     public static void width(GraphNode<String> node){
         if(node == null){
@@ -149,7 +149,7 @@ public class GraphCoding {
     }
 
     /**
-     * 最小生成树算法只psim
+     * 最小生成树算法之psim
      * 1.任意从图中选择一个点出发
      * 2.解锁当前点的所有出度边
      * 3.从所有边中找到权重最小的一条边

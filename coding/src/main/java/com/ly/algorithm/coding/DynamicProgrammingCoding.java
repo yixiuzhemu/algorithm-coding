@@ -8,6 +8,35 @@ import java.util.Map;
 
 /**
  * 动态规划
+ * 暴力递归和动态规划的关系
+ * 1.某一个暴力递归，有解的重复调用，就可以把这个暴力递归优化成动态规划
+ * 2.任何动态规划问题，都一定对应着某一个有解的重复调用的暴力递归
+ * 3.但不是所有的暴力递归，都一定对应着动态规划
+ *
+ * 面试题和动态规划的关系
+ * 1.解决一个问题，可能有很多尝试方法
+ * 2.可能在很多尝试方法中，又有若干个尝试方法有动态规划的方式
+ * 3.一个问题可能有若干种动态规划的解法
+ *
+ * 如何找到某个问题的动态规划方式
+ * 1.设计暴力递归：重要原则+4中常见尝试模型
+ * 2.分析有没有重复解：套路解决
+ * 3.用记忆化搜索——>用严格表结构实现动态规划，套路解决
+ * 4.看是否能继续优化，套路解决
+ *
+ * 暴力递归到动态规划的套路
+ * 1.你已经有了一个不违反原则的暴力递归，而且的确存在解的重复调用
+ * 2.找到哪些参数的变化会影响返回值，对每一个参数列出变化范围
+ * 3.参数间的所有的组合数量，意味着表大小
+ * 4.记忆化搜索的方法就是傻缓存，非常容易得到
+ * 5.规定好严格表的大小，分析位置的依赖顺序，然后从基础填写到最终解
+ * 6.对于有枚举行为的决策过程，进一步优化
+ *
+ * 动态规划的进一步优化
+ * 1.空间压缩
+ * 2.状态化简
+ * 3.四边形不等式
+ * 4.其它优化技巧
  * @author Ly
  * @create 2021/7/12 15:53
  * @desc
@@ -237,43 +266,7 @@ public class DynamicProgrammingCoding {
         int score2 = s[0][arr.length-1];
         String str = score1 > score2?"先手":"后手";
         System.out.println(str+"拿赢");
-        return Math.max(rMaxScore(arr,0,arr.length - 1),sMaxScore(arr,0,arr.length-1));
-    }
-
-    /**
-     * 先手拿
-     * @param arr
-     * @param L
-     * @param R
-     * @return
-     */
-    public static int rMaxScore(int[] arr,int L,int R){
-        //只剩一张牌。先手直接拿走
-        if(L == R){
-            return arr[L];
-        }
-        int score1 = arr[L] + rMaxScore(arr,L + 1,R);
-        int score2 = arr[R] + rMaxScore(arr,L,R - 1);
         return Math.max(score1,score2);
-    }
-
-    /**
-     * 后手拿，后手怎么拿，却决于先手怎么拿
-     * @param arr
-     * @param L
-     * @param R
-     * @return
-     */
-    public static int sMaxScore(int[] arr,int L,int R){
-        //只剩一张牌。后手肯定拿不到
-        if(L == R){
-            return 0;
-        }
-        //需要由对手确定 先手结果，先手结果一定是最差的情况
-        int score1 = rMaxScore(arr,L+1,R);
-        int score2 = rMaxScore(arr,L,R-1);
-        //先手一定会让 后手拿到分数最低的情况
-        return Math.min(score1,score2);
     }
 
     /**
@@ -375,8 +368,8 @@ public class DynamicProgrammingCoding {
             tmap[aChar - 'a'] ++;
         }
         for(int i = 0;i<map.length;i++){
-            //至少要包含一个字符
-            if(map[i][chars[0]-'a'] == 0){
+            //至少要包含一个字符 判断切割出的字符第一个是否存在于初始化的结果中
+            if(map[i][chars[0]-'a'] <= 0){
                 continue;
             }
             StringBuilder sb = new StringBuilder();
