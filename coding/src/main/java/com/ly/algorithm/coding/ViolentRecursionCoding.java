@@ -689,4 +689,47 @@ public class ViolentRecursionCoding {
         }
         return res;
     }
+
+
+    /**
+     * 给定一个数组，代表每个人喝完咖啡准备刷杯子的时间
+     * 只有一台咖啡机，一次只能洗一个杯子，时间耗费a，洗完才能洗下一杯
+     * 每个咖啡杯也可以自己挥发干净，时间耗费b，咖啡杯可以并行挥发
+     * 返回让所有咖啡杯变干净的最早完成时间
+     * 三个参数：int[] arr、int a 、 int b
+     */
+    public static int washCoffeeCup(int[] arr,int a,int b){
+        return wash(arr,a,b,0,0);
+    }
+
+    /**
+     *
+     * @param arr 喝完的时间 固定变量
+     * @param a 洗杯子耗时 固定变量
+     * @param b 自动挥发 固定变量
+     * @param index 当前需要清洗的杯子
+     * @param washTime 当前杯子如果需要洗，需要等到的时间
+     * @return
+     */
+    public static int wash(int[] arr,int a,int b,int index,int washTime){
+        if(index >= arr.length -1){
+            //返回自动挥发（arr[index]+b）和洗咖啡杯（Math.max(arr[index],washTime)+a）的最短时间
+            return Math.min(Math.max(arr[index],washTime)+a,arr[index]+b);
+        }
+        //洗杯子 需要的时间
+        int wash = Math.max(arr[index],washTime)+a;
+        //洗完index+1 需要消耗的时间
+        int time1 = wash(arr,a,b,index+1,wash);
+        //比较洗完当前杯子 和 洗完之后的杯子谁耗时长
+        //例如洗完当前杯子需要耗等到1000，洗完之后的杯子只需要等到300，那么总耗时就是1000
+        time1 = Math.max(wash,time1);
+
+        //挥发杯子
+        int volatilization = arr[index] + b;
+        int time2 = wash(arr,a,b,index+1,washTime);
+        time2 = Math.max(volatilization,time2);
+
+        return Math.min(time1,time2);
+    }
+
 }

@@ -1,8 +1,8 @@
 > #com.ly.algorithm-coding
 >>>some alorithm's coding
 
-> #[一、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
->> ##1、暴力递归就是尝试 
+>#[一、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
+>>## 1、暴力递归就是尝试 
 >>>* (1).把问题转化为规模缩小了的同类问题的子问题
 >>>* (2).有明确的不需要进行递归的条件（base case）
 >>>* (3).有当得到了子问题的结果之后的决策过程
@@ -43,6 +43,7 @@
 >>>* [(7).N皇后及常数时间项优化](nQueen "nQueen、nQueen2")
 >>>* [(8).机器人移动](move "move")
 >>>* [(9).凑金额](getPriceCount2 "getPriceCount2")
+>>>* [(10).暴力递归-寻找业务限制的尝试模型-洗咖啡杯](washCoffeeCup "washCoffeeCup")
 
 > #[二、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
 >> ##1、如何找到某个问题的动态规划方式
@@ -83,8 +84,9 @@
 >>>* [(5).拿牌问题](getMaxScore "getMaxScore")
 >>>* [(6).凑金额](getPriceCount2 "getPriceCount2")
 >>>* [(7).贴纸(记忆化搜索 最优解)](getStickerStr1 "getStickerStr1")
+>>>* [(8).两个字符串的最长公共子序列](longestPublicSubsequence "longestPublicSubsequence")
+>>>* [(9).洗咖啡杯](washCoffeeCup "washCoffeeCup")
 
-      
 > #[三、图](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java")
 >> ##[1、图](GraphCoding.java "GraphCoding.java")
 >>>* (1).由点的集合和边的集合构成

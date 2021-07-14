@@ -83,4 +83,13 @@ public class ViolentRecursionCodingTest {
         int count2 = ViolentRecursionCoding.getPriceCount2(ints,price);
         System.out.println("一共有"+count2+"种方法");
     }
+
+    @Test
+    public void washCoffeeCup(){
+        int[] arr = new int[]{5,2,6,19,31,28,5,6,8,10};
+        int a = 3;
+        int b = 20;
+        int i = ViolentRecursionCoding.washCoffeeCup(arr, a, b);
+        System.out.println("洗干净所有咖啡杯需要："+i);
+    }
 }

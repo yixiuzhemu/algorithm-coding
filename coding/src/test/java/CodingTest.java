@@ -71,7 +71,11 @@ public class CodingTest {
         maps.put(++count,"暴力递归-凑金额");
         maps.put(++count,"记忆化搜索-凑金额");
         maps.put(++count,"动态规划-凑金额");
-        maps.put(++count,"记忆化搜索 - 贴纸");
+        maps.put(++count,"记忆化搜索-贴纸");
+        maps.put(++count,"动态规划-多样本位置全对应的尝试模型-两个字符串的最长公共子序列");
+        maps.put(++count,"暴力递归-寻找业务限制的尝试模型-洗咖啡杯");
+        maps.put(++count,"动态规划-洗咖啡杯");
+
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;

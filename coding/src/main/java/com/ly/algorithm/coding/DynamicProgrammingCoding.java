@@ -389,4 +389,108 @@ public class DynamicProgrammingCoding {
         dp.put(sticker,res == Integer.MAX_VALUE ? -1 : res);
         return dp.get(sticker);
     }
+
+    ////多样本位置全对应的尝试模型 直接由样本数量构建bp
+    /**
+     *
+     * 两个字符串的最长公共子序列
+     * 给定两个字符串 str1，str2，找出两个字符串的最长公共子序列
+     * 例如：str1 = "a1b2c3s4d4e5" str2 = "1f2f22g3kh4i5mj"
+     * 最长公共子序列为12345
+     * (1).以str1的长度为行，str2的长度为列，组成一个二维规模的数组 dp
+     * (2).当第一行时，str1只取一个元素，那么第一行的值，不为0就为1，因为最长公共子序列只可能为1
+     * (3).同理
+     * (4).而需要求最长公共子序列，那么我们只需要直到二维数组最后一个位置的值即可
+     * (5).最后一个位置的值，一共有4种情况
+     *     这个值与str1的最后一个位置 str2的最后一个位置都无关  那么 dp[i][j] = dp[i-1][j-1]
+     *     这个值与str1的最后一个位置有关，与str2的最后一个位置无关 那么 dp[i][j] = dp[i][j-1]
+     *     这个值与str1的最后一个位置无关，与str2的最后一个位置有关 那么 dp[i][j] = dp[i-1][j]
+     *     这个值与str1的最后一个位置 str2的最后一个位置都有关  那么 dp[i][j] = dp[i-1][j-1] + 1
+     *     而第4种情况产生的条件必须是 str1[i] == str2[j]
+     *     所以要就需要找到公共子序列中在两个字符串中的最后一个位置在哪里
+     */
+    public static int longestPublicSubsequence(String str1,String str2){
+        char[] chars1 = str1.toCharArray();
+        char[] chars2 = str2.toCharArray();
+        int N1 = chars1.length;
+        int N2 = chars2.length;
+        int[][] dp = new int[N1+1][N2+1];
+        int count = 0;
+        for(int i = 0;i<N1;i++){
+            if(count != 0 || chars1[i] == chars2[0]){
+                count = 1;
+            }
+            dp[i][0] = count;
+        }
+        count = 0;
+        for(int j = 0;j<N2;j++){
+            if(count != 0 || chars1[0] == chars2[j]){
+                count = 1;
+            }
+            dp[0][j] = count;
+        }
+        for(int i = 1;i<N1;i++){
+            for(int j = 1;j<N2;j++){
+                //潜台词。可能性2 可能性3 一定比可能性1大，因为可能性2和可能性3的结果就是来自可能性1，所以进行决策时不需要考虑可能性1
+                dp[i][j] = Math.max(dp[i][j-1],dp[i-1][j]);
+                if(chars1[i] == chars2[j]){
+                    dp[i][j] = Math.max(dp[i][j],dp[i-1][j-1] + 1);
+                }
+            }
+        }
+        return dp[N1-1][N2-1];
+    }
+
+
+    /**
+     *
+     * 给定一个数组，代表每个人喝完咖啡准备刷杯子的时间
+     * 只有一台咖啡机，一次只能洗一个杯子，时间耗费a，洗完才能洗下一杯
+     * 每个咖啡杯也可以自己挥发干净，时间耗费b，咖啡杯可以并行挥发
+     * 返回让所有咖啡杯变干净的最早完成时间
+     * 三个参数：int[] arr、int a 、 int b
+     *
+     * 暴力递归->动态规划
+     * 1.存在两个变量 index 和 washTime
+     * 2.index 为arr的数组长度，washTime的范围值根据业务划分可知，范围是0-最大，而最大值就是全部使用咖啡机洗的情况
+     * 3.构建一个二维数组bp，行为index，列为washTime
+     * 4.由暴力递归逻辑可知，当index = N-1时 此时的值为 Math.min(Math.max(arr[N-1],washTime)+a,arr[N-1]+b);
+     * 5.有递归调用可知，index的值依赖于index+1的值，所以从下往上 从左往右进行填值
+     * @param arr
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int washCoffeeCup(int[] arr,int a,int b){
+        if(a >= b){
+            return b;
+        }
+        int N = arr.length;
+        int limit = 0;
+        for (int i : arr) {
+            limit = Math.max(limit,i)+a;
+        }
+        int[][] dp = new int[N][limit+1];
+        for(int washTime = 0;washTime <= limit;washTime++){
+            dp[N-1][washTime] = Math.min(Math.max(arr[N-1],washTime)+a,arr[N-1]+b);
+        }
+        for(int index = N -2;index>=0;index--){
+            for(int washTime = 0;washTime <= limit;washTime++){
+                int wash = Math.max(arr[index],washTime)+a;
+                int time1 = -1;
+                //方案存在的前提是 清洗时间不会超过最大时间限制
+                if(wash <= limit){
+                    time1 = dp[index+1][wash];
+                }
+                time1 = Math.max(wash,time1);
+
+                int volatilization = arr[index] + b;
+                int time2 = dp[index+1][washTime];
+                time2 = Math.max(volatilization,time2);
+
+                dp[index][washTime] = Math.min(time1,time2);
+            }
+        }
+        return dp[0][0];
+    }
 }

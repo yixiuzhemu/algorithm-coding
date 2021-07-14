@@ -68,4 +68,20 @@ public class DynamicProgrammingCodingTest {
         System.out.println("至少需要"+stickerStr1+"张贴纸");
     }
 
+    @Test
+    public void testLongestPublicSubsequence(){
+        String str1 = "a1b2c3s4d4e5";
+        String str2 = "1f2f22g3kh4i5mj";
+        int length = DynamicProgrammingCoding.longestPublicSubsequence(str1,str2);
+        System.out.println("最长公共子序列长度为："+length);
+    }
+
+    @Test
+    public void washCoffeeCup(){
+        int[] arr = new int[]{5,2,6,19,31,28,5,6,8,10};
+        int a = 3;
+        int b = 20;
+        int i2 = DynamicProgrammingCoding.washCoffeeCup(arr, a, b);
+        System.out.println("洗干净所有咖啡杯需要："+i2);
+    }
 }
