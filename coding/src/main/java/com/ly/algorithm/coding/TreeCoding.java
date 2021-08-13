@@ -115,11 +115,32 @@ public class TreeCoding {
 
     }
 
+    public static void suf2(Tree tree){
+        if(tree == null){
+            return;
+        }
+        java.util.Stack<Tree> treeStack = new java.util.Stack();
+        treeStack.push(tree);
+        Tree t = null;
+        while(!treeStack.isEmpty()){
+            t = treeStack.peek();
+            if(t.getLeft() != null && t.getLeft() != tree && t.getRight() != tree){
+                treeStack.push(t.getLeft());
+            }else if(t.getRight() != null && t.getRight() != tree){
+                treeStack.push(t.getRight());
+            }else{
+                System.out.println(treeStack.pop().getValue());
+                tree = t;
+            }
+        }
+
+    }
+
     /**
      * 宽度遍历
      * @param tree
      */
-    public static void suf2(Tree tree){
+    public static void width(Tree tree){
         if(tree == null){
             return;
         }
@@ -144,7 +165,7 @@ public class TreeCoding {
      * 层级遍历
      * @param tree
      */
-    public static void width(Tree tree){
+    public static void level(Tree tree){
         if(tree == null){
             return;
         }
@@ -365,6 +386,7 @@ public class TreeCoding {
     }
 
     /**
+     * 打印折痕
      * 请把一段纸条竖着放在桌子上，然后从纸条的下边向上方对折1次，压出折痕
      * 后展开。此时折痕是凹下去的，即折痕突起的方向指向纸条的背面。如果从
      * 纸条的下边向上方连续对折两次，压出折痕后展开，此时有三条折痕，从上到

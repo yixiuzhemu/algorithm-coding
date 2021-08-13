@@ -135,3 +135,26 @@
 >>>* (5).从出发点开始往外跳，计算出能到达的点的距离，计算完成后，选出距离最小的一个节点为下一跳，并且当前节点不再使用
 >>>* (6).直到整个Map遍历结束
 >>>* (7).[迪瑞特斯拉算法利用定制化小根堆进行优化](dijkstra2 "dijkstra2")
+
+># [四、二叉树](/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java "/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java")
+>>## [1、二叉树的递归套路](/coding/src/main/java/com/ly/algorithm/coding/RecursiveRoutineCoding.java "/coding/src/main/java/com/ly/algorithm/coding/RecursiveRoutineCoding.java")
+>>>* (1).假设以X节点为头，假设可以向X的左树和X的右树得到任何信息
+>>>* (2).在上一步的假设下，讨论以X为头节点的树，得到答案的可能性(最重要)  常见的可能性 1.与X有关  2.与X无关
+>>>* (3).列出所有可能性后，确定到底需求向左树和右树要什么样的信息
+>>>* (4).把左树信息和右树信息求全集，就是任何一颗子树都需要返回的信息S
+>>>* (5).递归函数返回S，每一颗子树都这么要求
+>>>* (6).写代码，在代码中考虑如何把左树的信息和右树的信息整合出整棵树的信息
+>>##[2、二叉树常见算法](/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java "/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java")
+>>>* [(1)先序遍历](pre "pre、pre1")
+>>>* [(2)中序遍历](mid "mid、mid")
+>>>* [(3)后序遍历](suf "suf、suf1")
+>>>* [(4)宽度遍历](width "width")
+>>>* [(5)层级遍历](level "level")
+>>>* [(6)获取二叉树的宽度](getWidth "getWidth")
+>>>* [(7)先序序列化](preSerial "preSerial")
+>>>* [(8)先序反序列化](buildTree "buildTree")
+>>>* [(9)层级序列化](levelSerial "levelSerial")
+>>>* [(10)层级反序列化](buildLevelTree "buildLevelTree")
+>>>* [(11)从拥有父节点的树中找到某一个节点的后继节点](getSuccessdingTree "getSuccessdingTree")
+>>>* [(12)从拥有父节点的树中找到某一个节点的前驱节点](getPrecursorNode "getPrecursorNode")
+>>>* [(13)打印折痕](printAllCrease "printAllCrease")

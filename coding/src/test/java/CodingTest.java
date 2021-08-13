@@ -38,6 +38,7 @@ public class CodingTest {
         maps.put(++count,"二叉树-宽度、层级遍历");
         maps.put(++count,"二叉树-序列化、反序列化");
         maps.put(++count,"二叉树-ParentTree树结构获取前驱、后继节点");
+        maps.put(++count,"二叉树-打印折痕");
         maps.put(++count,"二叉树的递归套路-二叉树最大距离");
         maps.put(++count,"二叉树的递归套路-搜索二叉树的头节点");
         maps.put(++count,"二叉树的递归套路-派对最大快乐值");
@@ -75,7 +76,10 @@ public class CodingTest {
         maps.put(++count,"动态规划-多样本位置全对应的尝试模型-两个字符串的最长公共子序列");
         maps.put(++count,"暴力递归-寻找业务限制的尝试模型-洗咖啡杯");
         maps.put(++count,"动态规划-洗咖啡杯");
-
+        maps.put(++count,"滑动窗口-获取子数组");
+        maps.put(++count,"滑动窗口-获取最大值");
+        maps.put(++count,"单调栈-获取左边以及右边比当前值小的位置");
+        maps.put(++count,"单调栈-获取最大和");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;
