@@ -5,7 +5,7 @@
 >>>* [(1).蓄水池算法-接球入袋（适用于抽奖场景，实现等概率）](/coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java "蓄水池算法-接球入袋")
 >>>* [(2).概率转化（将等概率的某个返回，转换成其它范围上的等概率）](/coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java "概率转化")
 
-
+ 
 >#  [二、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
 >>## 1、暴力递归就是尝试 
 >>>* (1).把问题转化为规模缩小了的同类问题的子问题
