@@ -1,3 +1,4 @@
+import com.ly.algorithm.coding.MonotonousStackCoding;
 import com.ly.algorithm.coding.SlideWindowCoding;
 import com.ly.algorithm.coding.SortCoding;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class SlideWindowCodingTest {
         int[] arr = new int[]{6,3,5,4,3,3,6,7};
         SlideWindowCoding.slideMaxNum(arr,3);
         System.out.println("--------------------------------------------");
-         SlideWindowCoding.slideMaxNum2(arr,3);
+         MonotonousStackCoding.slideMaxNum2(arr,3);
     }
 
     @Test

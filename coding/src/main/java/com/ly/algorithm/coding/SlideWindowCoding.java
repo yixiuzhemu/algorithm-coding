@@ -49,33 +49,6 @@ public class SlideWindowCoding {
     }
 
     /**
-     * 最大值的单调栈实现
-     * @param arr
-     * @param W
-     */
-    public static void slideMaxNum2(int[] arr,int W){
-        LinkedList<Integer> qmax = Lists.newLinkedList();
-        int[] results = new int[arr.length - W + 1];
-        int index = 0;
-        for(int R = 0;R < arr.length;R++ ){
-            while(!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[R]){
-                qmax.pollLast();
-            }
-            qmax.addLast(R);
-            //如果窗口没有形成W长度
-            if(qmax.peekFirst() == R - W){
-                qmax.pollFirst();
-            }
-            if(R >= W - 1){
-                results[index++] = arr[qmax.peekFirst()];
-            }
-        }
-        for (int result : results) {
-            System.out.println(result);
-        }
-    }
-
-    /**
      * 获取子数组
      * 给定一个整型数组arr，和一个整数num
      * 某个arr中的子数组sub，如果想达标，必须满足：

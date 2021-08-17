@@ -732,4 +732,29 @@ public class ViolentRecursionCoding {
         return Math.min(time1,time2);
     }
 
+    /**
+     * 暴力递归-象棋问题
+     * @param x
+     * @param y
+     * @param k
+     * @return
+     */
+    public static int horseJump(int x ,int y,int k){
+        if(k == 0){
+            return x  == 0 && y == 0 ? 1 : 0;
+        }
+        if(x < 0 || y < 0 || x > 8 || y > 9){
+            return 0;
+        }
+        int res = 0;
+        return horseJump(x-1, y+2,k-1)
+                + horseJump(x-2, y+1,k-1)
+                + horseJump(x-2, y-1,k-1)
+                + horseJump(x-1, y-2,k-1)
+                + horseJump(x+1, y+2,k-1)
+                + horseJump(x+2, y+1,k-1)
+                + horseJump(x+2, y-1,k-1)
+                + horseJump(x+1, y-2,k-1);
+    }
+
 }

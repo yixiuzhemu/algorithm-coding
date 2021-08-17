@@ -84,4 +84,12 @@ public class DynamicProgrammingCodingTest {
         int i2 = DynamicProgrammingCoding.washCoffeeCup(arr, a, b);
         System.out.println("洗干净所有咖啡杯需要："+i2);
     }
+
+    @Test
+    public void horseJump(){
+        int i = ViolentRecursionCoding.horseJump(3, 2,3);
+        System.out.println("马跳到目标位置，一共有："+i+"种方案");
+        int j = DynamicProgrammingCoding.horseJump(3, 2,3);
+        System.out.println("马跳到目标位置，一共有："+j+"种方案");
+    }
 }

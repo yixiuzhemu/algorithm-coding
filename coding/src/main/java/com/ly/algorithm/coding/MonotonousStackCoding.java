@@ -2,6 +2,7 @@ package com.ly.algorithm.coding;
 
 import com.google.common.collect.Lists;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -86,6 +87,33 @@ public class MonotonousStackCoding {
             }
         }
         return max;
+    }
+
+    /**
+     * 最大值的单调栈实现
+     * @param arr
+     * @param W
+     */
+    public static void slideMaxNum2(int[] arr,int W){
+        LinkedList<Integer> qmax = Lists.newLinkedList();
+        int[] results = new int[arr.length - W + 1];
+        int index = 0;
+        for(int R = 0;R < arr.length;R++ ){
+            while(!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[R]){
+                qmax.pollLast();
+            }
+            qmax.addLast(R);
+            //如果窗口没有形成W长度
+            if(qmax.peekFirst() == R - W){
+                qmax.pollFirst();
+            }
+            if(R >= W - 1){
+                results[index++] = arr[qmax.peekFirst()];
+            }
+        }
+        for (int result : results) {
+            System.out.println(result);
+        }
     }
 
 }

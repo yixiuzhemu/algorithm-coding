@@ -1,6 +1,11 @@
 > #com.ly.algorithm-coding
 >>>some alorithm's coding
 
+>#[一、常见算法题](/coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java "coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java")
+>>>* [(1).蓄水池算法-接球入袋（适用于抽奖场景，实现等概率）](蓄水池算法-接球入袋 "蓄水池算法-接球入袋")
+>>>* [(2).概率转化（将等概率的某个返回，转换成其它范围上的等概率）](概率转化 "概率转化")
+
+
 >#[一、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
 >>## 1、暴力递归就是尝试 
 >>>* (1).把问题转化为规模缩小了的同类问题的子问题
@@ -44,6 +49,7 @@
 >>>* [(8).机器人移动](move "move")
 >>>* [(9).凑金额](getPriceCount2 "getPriceCount2")
 >>>* [(10).暴力递归-寻找业务限制的尝试模型-洗咖啡杯](washCoffeeCup "washCoffeeCup")
+>>>* [(11).象棋问题](horseJump "horseJump")
 
 > #[二、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
 >> ##1、如何找到某个问题的动态规划方式
@@ -86,6 +92,7 @@
 >>>* [(7).贴纸(记忆化搜索 最优解)](getStickerStr1 "getStickerStr1")
 >>>* [(8).两个字符串的最长公共子序列](longestPublicSubsequence "longestPublicSubsequence")
 >>>* [(9).洗咖啡杯](washCoffeeCup "washCoffeeCup")
+>>>* [(10).象棋问题](horseJump "horseJump")
 
 > #[三、图](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java")
 >> ##[1、图](GraphCoding.java "GraphCoding.java")
@@ -158,3 +165,66 @@
 >>>* [(11)从拥有父节点的树中找到某一个节点的后继节点](getSuccessdingTree "getSuccessdingTree")
 >>>* [(12)从拥有父节点的树中找到某一个节点的前驱节点](getPrecursorNode "getPrecursorNode")
 >>>* [(13)打印折痕](printAllCrease "printAllCrease")
+
+
+># [五、滑动窗口](/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java "/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java")
+>>## [1、滑动窗口](SlideWindowCoding.java "SlideWindowCoding.java")
+>>>* (1).滑动窗口是一种想象出来的数据结构
+>>>* (2).滑动窗口有左边界L和右边界R
+>>>* (3).在数组或者字符串或者一个序列上，记为S，窗口就是S[L..R]这一部分
+>>>* (4).L往右滑意味着一个样本出了窗口，R往右滑意味着一个样本进了窗口
+>>>* (5).L和R都只能往右滑
+>>## [2、滑动窗口能做什么](SlideWindowCoding.java "SlideWindowCoding.java")
+>>>* (1).滑动窗口、首尾指针等技巧，说白了就是一种求解问题的流程设计
+>>>* (2).想用滑动窗口，要想办法把具体的问题转化为滑动窗口的处理流程
+>>>* (3).想用滑动窗口的最值的更新接口，就看看处理流程下，是否需要最值这个信息
+>>## [3、常见题型](SlideWindowCoding.java "SlideWindowCoding.java")
+>>>* [(1)获取最大值](slideMaxNum "slideMaxNum")
+>>>* [(2)获取子数组](getSubMember2 "getSubMember2")
+
+
+># [六、单调栈](/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java "/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java")
+>>## [1、单调栈](MonotonousStackCoding.java "MonotonousStackCoding.java")
+>>>* (1).一种特别设计的栈结构，为了解决如下的问题：
+>>>* 给定一个可能含有重复值的数组arr，i位置的树一定存在如下两个信息
+>>>* arr[i]的左侧离i最近并且小于(或者大于)arr[i]的数在哪儿
+>>>* arr[i]的右侧离i最近并且小于(或者大于)arr[i]的数在哪儿
+>>>* 如果想得到arr钟所有位置的两个信息，怎么能让得到信息的过程尽量快
+>>## [2、单调栈怎么使用](MonotonousStackCoding.java "MonotonousStackCoding.java")
+>>>* (1).想用单调栈，要想办法把具体的问题转化为单调栈塑哦解决的原问题
+>>## [3、常见题型](MonotonousStackCoding.java "MonotonousStackCoding.java")
+>>>* [(1)最大值的单调栈实现](slideMaxNum2 "slideMaxNum2")
+>>>* [(2)获取左边以及右边比当前值小的位置](getNearLess "getNearLess")
+>>>* [(3)获取最大和](getMaxSum "getMaxSum")
+
+
+># [七、斐波那契数列及推导](/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java "/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java")
+>>## [1、斐波那契数列](FibonacciProblemCoding.java "FibonacciProblemCoding.java")
+>>>* 斐波那契数列（Fibonacci sequence），又称黄金分割数列，因数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波那契数列以如下被以递推的方法定义：F(0)=0，F(1)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 2，n ∈ N*）
+>>## [2、斐波那契数列推导](FibonacciProblemCoding.java "FibonacciProblemCoding.java")
+>>>* 斐波那契满足严格的递推式(除了初始项，其它每一项不随条件转移)，所以每一步都拥有相同的矩阵
+>>>* 类似于 F(n) = F(n-1) + f(n-2) + ....+ f(n-k)的问题
+>>>* 都可以转换成常数项为k的矩阵问题
+>>>* 即 f(n) * f(n-1)*....*f(n-k) = f(k) * f(k-1) *....*f(1) * K阶矩阵的（n-k）次方
+>>>* 例如，斐波那契数列 = F(n) = F(n-1)+F(n-2) 属于一个2阶问题
+>>>* 那么转换为 f(n) * f(n-1) = f(2) * f(1) * (一个二阶矩阵) ^ (n-2)
+>>>* 通过代入给出的示例值，可以求出二阶矩阵为
+>>>* {
+>>>*     {1,1},
+>>>*     {1,0}
+>>>* }
+>>>*
+>>>* 例如，迈台阶问题，一个可以迈1阶，可以迈2阶，可以迈5阶，那么到n层台阶，一共有多少种迈法
+>>>* f(n) = f(n-1)+f(n-2)+f(n-5) 5阶问题
+>>>*
+>>>* 例如，奶牛问题，10年后奶牛会死亡
+>>>* f(n) = f(n-1)+f(n-3)-f(n-10) 10阶问题
+>>## [3、常见题型](MonotonousStackCoding.java "MonotonousStackCoding.java")
+>>>* [(1)斐波那契数列-暴力递归求解](violent "violent")
+>>>* [(2)斐波那契数列-线性求解](linear "linear")
+>>>* [(3)斐波那契-矩阵式求解](recent "recent")
+>>>* [(4)如何让一个数的次方计算的最快（Math.pow的实现原理）](matrixPower "matrixPower")
+>>>* [(5)矩阵相乘](multiMatrix "multiMatrix")
+>>>* [(6)斐波那契数列问题扩展-奶牛问题](cowRecent "cowRecent")
+>>>* [(7)类似斐波那契数列问题-达标字符串](~ "常数项不同，其余求解方法都与斐波那契-矩阵式求解相同")
+>>>* [(8)类似斐波那契数列问题-贴瓷砖](~ "常数项不同，其余求解方法都与斐波那契-矩阵式求解相同")

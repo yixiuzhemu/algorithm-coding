@@ -493,4 +493,39 @@ public class DynamicProgrammingCoding {
         }
         return dp[0][0];
     }
+
+
+    /**
+     * 动态规划-象棋问题
+     * @param x
+     * @param y
+     * @param k
+     * @return
+     */
+    public static int horseJump(int x,int y,int k){
+        int[][][] jump = new int[9][10][k+1];
+        jump[0][0][0] = 1;
+        for(int m = 1;m<=k;m++){
+            for(int i = 0;i<9;i++){
+                for(int j = 0;j<10;j++){
+                    jump[i][j][m] = getValue(jump,i-1, j+2,m-1)
+                            + getValue(jump,i-2, j+1,m-1)
+                            + getValue(jump,i-2, j-1,m-1)
+                            + getValue(jump,i-1, j-2,m-1)
+                            + getValue(jump,i+1, j+2,m-1)
+                            + getValue(jump,i+2, j+1,m-1)
+                            + getValue(jump,i+2, j-1,m-1)
+                            + getValue(jump,i+1, j-2,m-1);
+                }
+            }
+        }
+        return jump[x][y][k];
+    }
+
+    private static int getValue(int[][][] dp,int x,int y ,int k){
+        if(x < 0 || y < 0 || x > 8 || y > 9){
+            return 0;
+        }
+        return dp[x][y][k];
+    }
 }
