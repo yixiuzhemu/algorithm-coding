@@ -6,7 +6,7 @@
 >>>* [(2).概率转化（将等概率的某个返回，转换成其它范围上的等概率）](概率转化 "概率转化")
 
 
->#[一、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
+>#[二、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
 >>## 1、暴力递归就是尝试 
 >>>* (1).把问题转化为规模缩小了的同类问题的子问题
 >>>* (2).有明确的不需要进行递归的条件（base case）
@@ -51,7 +51,7 @@
 >>>* [(10).暴力递归-寻找业务限制的尝试模型-洗咖啡杯](washCoffeeCup "washCoffeeCup")
 >>>* [(11).象棋问题](horseJump "horseJump")
 
-> #[二、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
+> #[三、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
 >> ##1、如何找到某个问题的动态规划方式
 >>>* (1).设计暴力递归：重要原则+4中常见尝试模型
 >>>* (2).分析有没有重复解：套路解决
@@ -94,7 +94,7 @@
 >>>* [(9).洗咖啡杯](washCoffeeCup "washCoffeeCup")
 >>>* [(10).象棋问题](horseJump "horseJump")
 
-> #[三、图](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java")
+> #[四、图](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java")
 >> ##[1、图](GraphCoding.java "GraphCoding.java")
 >>>* (1).由点的集合和边的集合构成
 >>>* (2).虽然存在有向图和无向图的概念，但实际上都可以用有向图来表达
@@ -143,7 +143,7 @@
 >>>* (6).直到整个Map遍历结束
 >>>* (7).[迪瑞特斯拉算法利用定制化小根堆进行优化](dijkstra2 "dijkstra2")
 
-># [四、二叉树](/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java "/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java")
+># [五、二叉树](/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java "/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java")
 >>## [1、二叉树的递归套路](/coding/src/main/java/com/ly/algorithm/coding/RecursiveRoutineCoding.java "/coding/src/main/java/com/ly/algorithm/coding/RecursiveRoutineCoding.java")
 >>>* (1).假设以X节点为头，假设可以向X的左树和X的右树得到任何信息
 >>>* (2).在上一步的假设下，讨论以X为头节点的树，得到答案的可能性(最重要)  常见的可能性 1.与X有关  2.与X无关
@@ -167,7 +167,7 @@
 >>>* [(13)打印折痕](printAllCrease "printAllCrease")
 
 
-># [五、滑动窗口](/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java "/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java")
+># [六、滑动窗口](/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java "/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java")
 >>## [1、滑动窗口](SlideWindowCoding.java "SlideWindowCoding.java")
 >>>* (1).滑动窗口是一种想象出来的数据结构
 >>>* (2).滑动窗口有左边界L和右边界R
@@ -183,7 +183,7 @@
 >>>* [(2)获取子数组](getSubMember2 "getSubMember2")
 
 
-># [六、单调栈](/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java "/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java")
+># [七、单调栈](/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java "/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java")
 >>## [1、单调栈](MonotonousStackCoding.java "MonotonousStackCoding.java")
 >>>* (1).一种特别设计的栈结构，为了解决如下的问题：
 >>>* 给定一个可能含有重复值的数组arr，i位置的树一定存在如下两个信息
@@ -198,7 +198,7 @@
 >>>* [(3)获取最大和](getMaxSum "getMaxSum")
 
 
-># [七、斐波那契数列及推导](/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java "/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java")
+># [八、斐波那契数列及推导](/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java "/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java")
 >>## [1、斐波那契数列](FibonacciProblemCoding.java "FibonacciProblemCoding.java")
 >>>* 斐波那契数列（Fibonacci sequence），又称黄金分割数列，因数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波那契数列以如下被以递推的方法定义：F(0)=0，F(1)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 2，n ∈ N*）
 >>## [2、斐波那契数列推导](FibonacciProblemCoding.java "FibonacciProblemCoding.java")
