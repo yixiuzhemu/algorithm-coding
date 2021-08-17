@@ -1,12 +1,12 @@
 > #com.ly.algorithm-coding
 >>>some alorithm's coding
 
-># [一、常见算法题](/coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java "coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java")
+># 一、常见算法题
 >>>* [(1).蓄水池算法-接球入袋（适用于抽奖场景，实现等概率）](/coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java "蓄水池算法-接球入袋")
 >>>* [(2).概率转化（将等概率的某个返回，转换成其它范围上的等概率）](/coding/src/main/java/com/ly/algorithm/coding/CommonCoding.java "概率转化")
 
 
->#  [二、暴力递归](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java")
+>#  二、暴力递归
 >>## 1、暴力递归就是尝试 
 >>>* (1).把问题转化为规模缩小了的同类问题的子问题
 >>>* (2).有明确的不需要进行递归的条件（base case）
@@ -51,7 +51,7 @@
 >>>* [(10).暴力递归-寻找业务限制的尝试模型-洗咖啡杯](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "washCoffeeCup")
 >>>* [(11).象棋问题](/coding/src/main/java/com/ly/algorithm/coding/ViolentRecursionCoding.java "horseJump")
 
-> # [三、动态规划](/coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java "coding/src/main/java/com/ly/algorithm/coding/DynamicProgrammingCoding.java")
+> # 三、动态规划
 >> ## 1、如何找到某个问题的动态规划方式
 >>>* (1).设计暴力递归：重要原则+4中常见尝试模型
 >>>* (2).分析有没有重复解：套路解决
@@ -100,33 +100,33 @@
 >>>* (2).虽然存在有向图和无向图的概念，但实际上都可以用有向图来表达
 >>>* (3).边上可能带有权值
       
->> ## [2、图的宽度优先遍历](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "width")
+>>[2、图的宽度优先遍历](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "width")
 >>>* (1).利用队列实现
 >>>* (2).从源节点开始依次按照宽度进队列，然后弹出
 >>>* (3).每弹出一个点，把该节点所有没有进过队列的邻接节点加入队列
 >>>* (4).直到队列变空
 
->> ## [3、的深度优先遍历](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "height")
+>>[3、的深度优先遍历](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "height")
 >>>* (1).利用栈实现
 >>>* (2).从源节点开始把节点按照深度放入栈，然后弹出
 >>>* (3).每弹出一个点，把该节点下一个没有进过栈的邻接点放入栈
 >>>* (4).直到栈变空
        
->>## [4、图的拓扑排序算法](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "sort")
+>>[4、图的拓扑排序算法](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "sort")
 >>>* (1).在图中找到所有入度为0 的点输出
 >>>* (2)，把所有入度为0的点在图中删掉，继续找入度为0的点输出，周而复始
 >>>* (3).图的所有的点都被删除后，依次输出的顺序就是拓扑排序
 >>>* 要求：有向图切其中没有环
 >>>* 应用：事件安排、编译顺序
   
->> ## [5、最小生成树算法之Kruskal](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "kruskal")
+>>[5、最小生成树算法之Kruskal](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "kruskal")
 >>>* (1).总是从权值最小的边开始考虑，依次考察权值依次变大的边
 >>>* (2).当前的边要么进入最小生成树的集合，要么丢弃
 >>>* (3).如果当前的边进入最小生成树的集合中不会形成环，就要当前边
 >>>* (4).如果当前的边进入最小生成树的集合中会形成环，就不要当前边
 >>>* (5).考察完所有边之后，最小生成树的集合也得到了
   
->> ## [6、最小生成树算法之psim](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "psim") 
+>>[6、最小生成树算法之psim](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "psim") 
 >>>* (1).任意从图中选择一个点出发
 >>>* (2).解锁当前点的所有出度边
 >>>* (3).从所有边中找到权重最小的一条边
@@ -134,7 +134,7 @@
 >>>* (5).直到所有点都被解锁，再移除不需要的边
 >>>* (6).[使用小根堆实现](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "psim2")
   
->> ## [7、迪瑞特斯拉算法](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "dijkstra")
+>>[7、迪瑞特斯拉算法](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "dijkstra")
 >>>* (1).默认不允许出现权重为负数的边
 >>>* (2).必须给出一个出发点
 >>>* (3).如果存在某个点无法到达，则距离为正无穷
@@ -143,7 +143,7 @@
 >>>* (6).直到整个Map遍历结束
 >>>* (7).[迪瑞特斯拉算法利用定制化小根堆进行优化](/coding/src/main/java/com/ly/algorithm/coding/GraphCoding.java "dijkstra2")
 
-># [五、二叉树](/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java "/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java")
+># 五、二叉树
 >>## 1、二叉树的递归套路
 >>>* (1).假设以X节点为头，假设可以向X的左树和X的右树得到任何信息
 >>>* (2).在上一步的假设下，讨论以X为头节点的树，得到答案的可能性(最重要)  常见的可能性 1.与X有关  2.与X无关
@@ -167,7 +167,7 @@
 >>>* [(13)打印折痕](/coding/src/main/java/com/ly/algorithm/coding/TreeCoding.java "printAllCrease")
 
 
-># [六、滑动窗口](/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java "/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java")
+># 六、滑动窗口
 >>## 1、滑动窗口
 >>>* (1).滑动窗口是一种想象出来的数据结构
 >>>* (2).滑动窗口有左边界L和右边界R
@@ -183,7 +183,7 @@
 >>>* [(2)获取子数组](/coding/src/main/java/com/ly/algorithm/coding/SlideWindowCoding.java "getSubMember2")
 
 
-># [七、单调栈](/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java "/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java")
+># 七、单调栈
 >>## 1、单调栈
 >>>* (1).一种特别设计的栈结构，为了解决如下的问题：
 >>>* 给定一个可能含有重复值的数组arr，i位置的树一定存在如下两个信息
@@ -198,7 +198,7 @@
 >>>* [(3)获取最大和](/coding/src/main/java/com/ly/algorithm/coding/MonotonousStackCoding.java "getMaxSum")
 
 
-># [八、斐波那契数列及推导](/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java "/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java")
+># 八、斐波那契数列及推导
 >>## 1、斐波那契数列
 >>>* 斐波那契数列（Fibonacci sequence），又称黄金分割数列，因数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波那契数列以如下被以递推的方法定义：F(0)=0，F(1)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 2，n ∈ N*）
 >>## 2、斐波那契数列推导
@@ -230,7 +230,7 @@
 >>>* [(8)类似斐波那契数列问题-贴瓷砖](/coding/src/main/java/com/ly/algorithm/coding/FibonacciProblemCoding.java "常数项不同，其余求解方法都与斐波那契-矩阵式求解相同")
 
 
-># [九、排序算法](/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java "/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java")
+># 九、排序算法
 >>## 1、常见算法
 >>>* [(1)选择排序](/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java "selectSort")
 >>>* [(2)冒泡排序](/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java "bubblingSort")
