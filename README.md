@@ -240,3 +240,12 @@
 >>>* [(6)堆排序](/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java "heapSort")
 >>>* [(7)计数排序](/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java "commonMergeSort")
 >>>* [(8)基数排序](/coding/src/main/java/com/ly/algorithm/coding/SortCoding.java "quickSort")
+
+
+># [十、KMP算法](/coding/src/main/java/com/ly/algorithm/coding/KmpCoding.java "/coding/src/main/java/com/ly/algorithm/coding/KmpCoding.java")
+>>## 1、KMP算法
+>>>* (1).KMP算法-加速思路
+>>>* (2).KMP算法-next数组求解及加速思路
+>>## 2、KMP算法的实现
+>>>* (1).[(1)KMP算法的实现](/coding/src/main/java/com/ly/algorithm/coding/KmpCoding.java "search")
+>>## 3、KMP算法的应用
