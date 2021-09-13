@@ -87,9 +87,9 @@ public class DynamicProgrammingCodingTest {
 
     @Test
     public void horseJump(){
-        int i = ViolentRecursionCoding.horseJump(3, 2,3);
+        int i = ViolentRecursionCoding.horseJump(8, 6,10);
         System.out.println("马跳到目标位置，一共有："+i+"种方案");
-        int j = DynamicProgrammingCoding.horseJump(3, 2,3);
+        int j = DynamicProgrammingCoding.horseJump(8, 6,10);
         System.out.println("马跳到目标位置，一共有："+j+"种方案");
     }
 }

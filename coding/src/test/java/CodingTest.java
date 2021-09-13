@@ -89,6 +89,10 @@ public class CodingTest {
         maps.put(++count,"类似斐波那契数列问题-贴瓷砖");
         maps.put(++count,"蓄水池算法-接球入袋");
         maps.put(++count,"概率转化");
+        maps.put(++count,"KMP算法-匹配子串");
+        maps.put(++count,"KMP算法-旋转字符串");
+        maps.put(++count,"KMP算法-相等结构树");
+        maps.put(++count,"bfprt算法");
         Random random = new Random();
         Set<Integer> sets = Sets.newHashSet();
         Integer num = count / 3;

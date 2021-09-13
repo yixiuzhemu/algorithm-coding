@@ -1,5 +1,14 @@
 package com.ly.algorithm.coding;
 
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Queues;
+import com.ly.algorithm.Node;
+import com.ly.algorithm.Tree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * KMP算法（字符串匹配算法）
  * 假设现在有俩个字符串 str、matcher，如果matcher属于str的子串，请输出第一次全匹配开始的位置
@@ -35,10 +44,11 @@ package com.ly.algorithm.coding;
  * 2.因为起始位置+1的位置  到  X-next[5] 肯定没有任何一个位置让matcher全匹配
  * 假设 X回退到位置1 并且可以全匹配，
  * 即
- * str ：    a   a b a a   b
- * matcher:      a a b a   a c
- * 那么表示1位置之后的所有字符 都完全匹配matcher，那么此时c位置的前缀后缀相等的值 就变成了4
- * 此时我们知道c位置的最大前缀后缀匹配值为2 ，互相矛盾，所以起始位置+1的位置  到  X-next[5] 肯定没有任何一个位置让matcher全匹配
+ * str ：    a a b a a b
+ * matcher1:   a a b a a c
+ * matcher2: a a b a a c
+ * 那么表示1位置之后的所有字符 都完全匹配matcher，那么此时c位置的前缀后缀相等的值 就变成了4(需要matcher的 aaba 等于 abaa )
+ * 而实际上c位置的最大前缀后缀匹配值为2 ，互相矛盾，所以起始位置+1的位置  到  X-next[5] 肯定没有任何一个位置让matcher全匹配
  *
  *时间复杂度
  *                X(最大值为N)             X-Y(最大值为N)
@@ -57,6 +67,7 @@ package com.ly.algorithm.coding;
 public class KmpCoding {
 
     /**
+     *  匹配子串
      * 当目标字符串在源字符串匹配时，返回第一个索引的位置
      * @param str
      * @param match
@@ -138,5 +149,57 @@ public class KmpCoding {
         }
         return next;
     }
+
+    /**
+     * KMP算法-旋转字符串
+     * 类似 123456  -> 234561 的形式，它们互为旋转字符串
+     * 现在又str1，str2两个字符串，判断是否互为选择字符串
+     *
+     * 1.如果长度不同，那么肯定不互为旋转字符串
+     * 2.将str1扩充为2倍，判断str2是否属于str1的字串
+     * 例如 123456123456，如果str2是str1的子串，那么str1，str2一定互为旋转字符串
+     */
+
+    public static boolean rotateStr(String str1 , String str2){
+        if( str1.length() != str2.length()){
+            return false;
+        }
+        str1 += str1;
+        int search = search(str1, str2);
+        if(search != -1){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * KMP算法-相等结构树
+     * 现有两棵树N1,N2，如果满足N2的所有节点在N1上都能找到一个完全相等的结构，那么认为N2与N1相等
+     * 暴力解法：
+     * 从头节点开始，判断两棵树上的节点是否完全相等，时间复杂度 O(N*M)
+     *
+     * KMP解法：
+     * 将N1,N2进行先序序列化，转换成两个字符串，判断N2是否是N1的字字符串，时间复杂度 O(N)
+     */
+    public static boolean treeEquals(Tree N1,Tree N2){
+        Queue<String> q1 = new LinkedList<>();
+        TreeCoding.preSerial(N1,q1);
+        String s1 = JSON.toJSONString(q1);
+        s1 = s1.replaceAll("\\[","");
+        s1 = s1.replaceAll("\\]","");
+        System.out.println(s1);
+        Queue<String> q2 = new LinkedList<>();
+        TreeCoding.preSerial(N2,q2);
+        String s2 = JSON.toJSONString(q2);
+        s2 = s2.replaceAll("\\[","");
+        s2 = s2.replaceAll("\\]","");
+        System.out.println(s2);
+        int search = search(s1, s2);
+        if(search != -1){
+            return true;
+        }
+        return false;
+    }
+
 
 }
